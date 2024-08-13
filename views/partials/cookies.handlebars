@@ -1,0 +1,20 @@
+ <div class="centerContainer" >
+
+
+    <form class="terms centerContainer column" method="POST" action="/cookies" id="agreement"> 
+        <div class="userdetails column">
+            <input name="username" id="username" autocomplete="off" placeholder="CREATE USERNAME"></input>
+        </div>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="row">
+            <button class="enterbutton" name="yes">FEED THE PERFORMANCE</button>
+            {{!-- <button class="exitbutton"name="no">exit</button> --}}
+        </div>
+
+    </form>
+  
+
+
+</div>
+
+

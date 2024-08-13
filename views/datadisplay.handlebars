@@ -1,0 +1,71 @@
+
+  <div class="performers column">
+                    {{#each users}}
+                     
+                    <ul class="user">
+                                          
+                                            {{#if secret}}
+                                                <li>{{username}}: "{{secret}}"</li>
+                                            {{/if}}
+                                            {{#if service_choice}}
+                                                <li>{{username}} likes {{service_choice}}</li>
+                                            {{/if}}
+                                            {{#if performer_choice}}
+                                                <li>{{username}} wants {{performer_choice}}</li>
+                                            {{/if}}
+                                            {{#if confession}}
+                                                <li>{{username}} "{{confession}}"</li>
+                                            {{/if}}
+                                            {{#if cheated}}
+                                                <li>did {{username}} ever cheat? {{cheated}}</li>
+                                            {{/if}}
+                                            {{#if birth_city}}
+                                                <li>{{username}} was born in {{birth_city}}</li>
+                                            {{/if}}
+                                            {{#if childhodd_nickname}}
+                                                <li>{{username}} used to be called {{childhodd_nickname}}</li>
+                                            {{/if}}
+                                            {{#if act_user_enjoys}}
+                                                <li>{{username}} enjoys {{act_user_enjoys}}</li>
+                                            {{/if}}
+                                            {{#if what_you_want_singles_to_know}}
+                                                <li>{{username}} wants singles to know that {{what_you_want_singles_to_know}}</li>
+                                            {{/if}}
+                                            {{#if sex_role}}
+                                                <li>{{username}} is a {{sex_role}}</li>
+                                            {{/if}}
+                                            {{#if sex_work_consumer_experience}}
+                                                <li>{{username}} has paid for {{sex_work_consumer_experience}}</li>
+                                            {{/if}}
+                                            {{#if sex_work_experience}}
+                                                <li>{{username}} recieved money for {{sex_work_experience}}</li>
+                                            {{/if}}
+                                            {{#if looking_for}}
+                                                <li>{{username}} is looking for {{looking_for}}</li>
+                                            {{/if}}
+                                            {{#if told_a_lie}}
+                                                <li>{{username}} lies " {{looking_for}} "</li>
+                                            {{/if}}
+                                            {{#if secret_kept_from_your_family}}
+                                                <li>{{username}} doesnt want their family to know that {{secret_kept_from_your_family}}</li>
+                                            {{/if}}
+                                            {{#if addictions}}
+                                                <li>{{username}} is hooked on {{addictions}}</li>
+                                            {{/if}}
+                                            {{#if mothers_maiden_name}}
+                                                <li>{{username}}'s mother is called {{mothers_maiden_name}}</li>
+                                            {{/if}}
+                                            {{#if do_you_want_to_be_watched}}
+                                                <li>{{username}}: " {{do_you_want_to_be_watched}} "</li>
+                                            {{/if}}
+                                            {{#if need}}
+                                                <li>{{username}} needs {{need}}</li>
+                                            {{/if}}
+                                            
+                                            {{#if masturbation}}
+                                                <li>{{username}} masturbates {{masturbation}}</li>
+                                            {{/if}}
+                                  
+                    </ul>
+                    {{/each}}
+    </div>

@@ -1,0 +1,174 @@
+
+
+
+
+
+   <form class="" action="/userdetails" method="POST">
+
+
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <input id="answers" name="name" value="put in username">
+       
+        <button class="verify" > search </button>
+        </div>
+    </form>
+
+
+
+{{#if user}}
+    <div>
+
+
+        <ul>
+
+            <li> {{user.username}}</li>
+            <li>said they were {{user.age}} years old</li>
+            <li>{{user.email}}</li>
+            <li> {{user.name}}</li>
+            {{#if user.has_tipped_performer}}
+                 <li>{{user.username}} has paid for something</li>
+            {{/if}}
+            {{#if user.MistressAmandara}}
+                 <li>{{user.username}} has paid  {{user.MistressAmandara}} to Mistress Amaranda</li>
+            {{/if}}
+            {{#if user.PetraBlair}}
+                 <li>{{user.username}} has paid  {{user.PetraBlair}} to Petra Blair</li>
+            {{/if}}
+            {{#if user.Kiko}}
+                 <li>{{user.username}} has paid  {{user.Kiko}} to Kiko</li>
+            {{/if}}
+              {{#if user.GoddessVanessa}}
+                 <li>{{user.username}} has paid    {{user.GoddessVanessa}}to Goddess Vanessa</li>
+            {{/if}}
+              {{#if user.GoofyToof}}
+                 <li>{{user.username}} has paid  {{user.GoofyToof}} to Goofy toof</li>
+            {{/if}}
+            {{#if user.thebenefactress}}
+                 <li>{{user.username}} has paid   {{user.thebenefactress}} to The Benefactress</li>
+            {{/if}}
+            {{#if user.performer_choice}}
+                 <li>they want {{user.performer_choice}}</li>
+            {{/if}}
+            {{#if user.service_choice}}
+                 <li>the service they want {{user.service_choice}}</li>
+            {{/if}}
+
+            {{!-- {{#if user.humanity_check}}
+                 <li>they are turned on by: 
+                     {{#each user.humanity_check.answer}}
+                                 <img src="{{this}}"> 
+                     {{/each}}
+            </li> --}}
+            {{!-- {{/if}}   --}}
+            {{#if user.readiness}}
+                 <li>{{user.readiness}}</li>
+            {{/if}}  
+            
+            {{#if user.do_you_want_to_feel}}
+                 <li>do u want to feel= {{do_you_want_to_feel}}</li>
+            {{/if}}  
+            
+            {{#if user.what_you_want_singles_to_know}}
+                 <li>what do they want singles to know? {{user.what_you_want_singles_to_know}}</li>
+            {{/if}}  
+            {{#if user.feelings_towards_danger}}
+                 <li>how they feel about danger: {{user.feelings_towards_danger}}</li>
+            {{/if}}  
+            
+            {{#if user.sex_role}}
+                 <li>they are {{user.sex_role}}</li>
+            {{/if}}  
+            
+            {{#if user.sex_work_experience}}
+                 <li>has made money on: {{user.sex_work_experience}}</li>
+            {{/if}}  
+            {{#if user.sex_work_consumer_experienc}}
+                 <li>the paid money for: {{user.sex_work_consumer_experienc}}</li>
+            {{/if}}  
+            
+            
+            {{#if user.follows_link_to_foot_porn}}
+                 <li>they visited foot porn {{user.follows_link_to_foot_porn}}</li>
+            {{/if}}  
+            
+            {{#if user.looking_for}}
+                 <li>they are looking for {{user.looking_for}}</li>
+            {{/if}}  
+            
+            {{#if user.being_a_dog}}
+                 <li>feelings about being a dog {{user.being_a_dog}}</li>
+            {{/if}}  
+            
+            {{#if user.does_data_make_horny}}
+                 <li>does data make them horny? {{user.does_data_make_horny}}</li>
+            {{/if}}  
+            
+            {{#if user.favorite_activity}}
+                 <li>their favorite activity is {{user.favorite_activity}}</li>
+            {{/if}} 
+            
+             {{#if user.sexual_secret}}
+                 <li>sexual secret: {{user.sexual_secret}}</li>
+            {{/if}}
+   
+            {{#if user.confession}}
+                 <li>confession: {{user.confession}}</li>
+            {{/if}}   
+
+            {{#if user.cheated}}
+                 <li>did they confess to cheating?: {{user.cheated}}</li>
+            {{/if}}    
+
+            {{#if user.confession}}
+                 <li>confession: {{user.confession}}</li>
+            {{/if}}    
+            {{#if user.act_user_enjoys}}
+                 <li>they like : {{user.act_user_enjoys}}</li>
+            {{/if}}    
+
+            {{#if user.mothers_maiden_name }}
+                 <li>their moms maiden name is: {{user.mothers_maiden_name }}</li>
+            {{/if}}
+
+            {{#if user.birth_city }}
+                 <li>they were born in: {{user.birth_city }}</li>
+            {{/if}}
+             {{#if user.first_pet }}
+                 <li>their first pet was called: {{user.first_pet }}</li>
+            {{/if}} 
+            
+            {{#if user.childhodd_nickname }}
+                 <li>they used to be called: {{user.childhodd_nickname }}</li>
+            {{/if}} 
+            
+            {{#if user.elementary_school }}
+                 <li>they went to school at: {{user.elementary_school}}</li>
+            {{/if}} 
+            
+            {{#if user.free_will }}
+                 <li>about free will: {{user.free_will }}</li>
+            {{/if}} 
+            
+            {{#if user.sharing_mastubatory_fantasies }}
+                 <li>they masturbate {{user.sharing_mastubatory_fantasies }}</li>
+            {{/if}} 
+            
+            {{#if user.masturbation }}
+                 <li>they masturbate {{user.masturbation }}</li>
+            {{/if}} 
+            {{#if user.art_turn_on  }}
+                 <li>does art turn them on?: {{user.art_turn_on  }}</li>
+            {{/if}}
+            
+         
+        </ul>
+       
+
+
+
+
+
+    </div>
+{{else}}
+    <p>{{message}}   </p> 
+{{/if}}     

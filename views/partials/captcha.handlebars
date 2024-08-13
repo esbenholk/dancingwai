@@ -1,0 +1,49 @@
+<div class="centerContainer fixed opaque">
+    <form class="recaptcha" action="/robottest" method="POST">
+
+        <div class="row align-left">
+            <input type="checkbox" id="recaptcha" name="recaptcha">
+            <label for="periph3"> I am not a robot</label>
+        </div>
+
+        <div class="column">
+            <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png">
+            <span >reCAPTCHA</span>
+            <div class="row">
+                <a href="#">Privacy</a>
+                <span class="dash">-</span>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <input type="hidden" id="answers" name="answers" value="array of images">
+        <input type="hidden" id="question" name="question" value="question">
+        
+         <div class="recaptcha-grid-container" style="display:none">
+             <div class="question">
+                <p>Click on the images that turn you on.</p>
+                <p>click verify once there are none left</p>
+            </div>
+            <ul class="recaptcha-grid">
+                <div class="row">
+                <img>   <img>   <img>  
+                </div> 
+                 <div class="row">
+                <img>   <img>   <img>  
+                </div> 
+                 <div class="row">
+                <img>   <img>   <img>  
+                </div> 
+              
+            </ul>
+            <button class="verify" > VERIFY </button>
+        </div>
+    </form>
+
+   
+</div>
+
+
+
+
