@@ -1,0 +1,19 @@
+{
+  "name": "dancingwai",
+  "version": "1",
+  "description": "web app to enable user interface with llm project\"",
+  "main": "index",
+  "author": "esben holk",
+  "license": "mit",
+  "private": false,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pg": "^8.12.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.3"
+  }
+}
