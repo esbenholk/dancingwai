@@ -1,20 +1,29 @@
-        {{!-- <div class='popup'>
-            <div class='header'><p>X</p></div>
-            <div class='content'>
-              <!-- <button class="button" id="submit">INJECT RANDOMNESS</button> -->
-              <input type="text" id="name" placeholder="TELL ME UR NAME"> </input>
-              <a class="btn"id="submit" href="" title="">INJECT RANDOMNESS</a><span class="color color--blue" data-value="1"></span><span class="color color--orange" data-value="1"></span><span class="color color--green" data-value="1"></span><span class="color color--white" data-value="1"></span>
-            </div>
-        </div> --}}
-                
 
-        {{#if shouldLogIn}}
+        {{!-- {{#if shouldLogIn}}
             {{>cookies}}
-        {{/if}}
+        {{/if}} --}}
 
+        {{>torus}}
+        <a class="btn"id="submit" href="" title="">FEED</a><span class="color color--blue" data-value="1"></span><span class="color color--orange" data-value="1"></span><span class="color color--green" data-value="1"></span><span class="color color--white" data-value="1"></span>
 
-
-
+        <div class="sliders">
+                        <div class="sliderContainer">
+                            <input type="range" min="1" max="100" value="50" class="slider" id="param4" oninput='updateTextInput(this.value, "param4value");'>
+                            <p id="param4value">50%</p>
+                        </div>
+                        <div class="sliderContainer">
+                            <input type="range" min="1" max="100" value="50" class="slider" id="param3" oninput='updateTextInput(this.value, "param3value");'>
+                            <p id="param3value">50%</p>
+                        </div>
+                        <div class="sliderContainer">
+                            <input type="range" min="1" max="100" value="50" class="slider" id="param2" oninput='updateTextInput(this.value, "param2value");'>
+                            <p id="param2value">50%</p>
+                        </div>
+                        <div class="sliderContainer">
+                            <input type="range" min="1" max="100" value="50" class="slider" id="param1" oninput='updateTextInput(this.value, "param1value");'>
+                            <p id="param1value">50%</p>
+                        </div>
+        </div>
 
 
 
