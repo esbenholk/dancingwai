@@ -42,7 +42,7 @@ stun.request("stun.l.google.com:19302", (err, res) => {
 
 ///cookie-setup
 const cookieSession = require('cookie-session');
-// const csurf = require('csurf');
+const csurf = require('csurf');
 const cookieParser = require("cookie-parser");
 
 app.use(cookieParser());
@@ -60,12 +60,12 @@ app.use(express.urlencoded({
   extended: false
 }));
 
-// app.use(csurf({ cookie: false })); 
+app.use(csurf({ cookie: false })); 
 
-// app.use(function(req, res, next) {
-//   res.locals.csrfToken = req.csrfToken();
-//   next();
-// });  
+app.use(function(req, res, next) {
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});  
 
 app.use(cors());
 // app.use(router);
@@ -161,6 +161,9 @@ app.get("/", (req, res) => {
   } else {
     // If session exists, greet the user
     // res.send('Welcome back! You are already logged in.');
+
+    console.log("has cookie  looks for user", req.cookies.id);
+
     databaseActions
       .getUser(req.cookies.id)
       .then(result => {
