@@ -13,7 +13,8 @@ const http = require("http");
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8123;
+
 
 app.use(express.json());
 
@@ -69,7 +70,7 @@ app.use(function(req, res, next) {
 app.use(cors());
 // app.use(router);
 app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ limit: "50mb", extended: true }));
+// app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
@@ -87,8 +88,19 @@ const io = require('socket.io')(server, { //8123 is the local port we are bindin
   }
 });
 
+
+//This funciton is needed to let some time pass by between conversation and closing. This is only for demo purpose.
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}  
+
 var GameSocketID;
 
+// App Code starts here
+
+console.log('Starting Socket.IO demo server', );
 
 io.on('connection', (socket) => {
 
@@ -131,6 +143,8 @@ io.on('connection', (socket) => {
 
 
 	});
+
+
 
 
 
@@ -230,7 +244,7 @@ app.post("/cookies",  (req, res) => {
 
 app.use((request, response, next) => {
   if (request.cookies.authenticated != "true") {
-      response.redirect("/cookies");
+      // response.redirect("/cookies");
       response.send();
       return (url = request.url);
   } else {
@@ -239,6 +253,6 @@ app.use((request, response, next) => {
 });
 
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

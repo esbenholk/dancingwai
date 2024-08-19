@@ -225,11 +225,14 @@ input[type=range]:focus::-ms-fill-upper {
 
 
 .btn--clicked {
-  transition: 0.6s cubic-bezier(0.01, 1.69, 0.99, 0.94);
-  padding: 15px 2px;
-  width: 50px;
-  color: transparent;
+  transition: 1.2s cubic-bezier(0.01, 1.69, 0.99, 0.94);
+  padding: 0;
   z-index: -10;
+  background-color: black;
+  width: 0px;
+  height: 0px;
+  color: rgba(0,0,0,0);
+
 }
 
 #progressBar{

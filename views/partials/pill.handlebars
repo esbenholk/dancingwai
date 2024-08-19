@@ -18,7 +18,7 @@
 
 	async function  main() {
 
-		
+		document.getElementById('submit').addEventListener('click', moveGroup);
 		const divValue = 100;
 		const scales = [0.5,0.5,0.5,0.5];
 		const param1 = document.querySelector("#param1");
@@ -83,6 +83,13 @@
 
 		let model;
 		let cubes = [];
+
+		let targetZ = group.position.z;
+		let isAnimating = false;
+		let hasReset = false;
+		let animationStartTime = null;
+		const animationDuration = 1500; // 1 second
+		let rotationSpeed =  0.001;
 
 
 	  	const hdrEquirect = new RGBELoader().load(
@@ -169,6 +176,9 @@
 
 					}
 					scene.add(group);
+					targetZ = group.position.z;
+
+					console.log(targetZ);
 
 
 					render();
@@ -184,8 +194,32 @@
 		}
 
 
+		// Function to move the group along the Z-axis
+		function moveGroup() {
 
-		
+			if (!isAnimating) {
+					hasReset = false;
+					// Set the target Z position (e.g., move forward by 2 units)
+					targetZ = -150;
+					rotationSpeed =  0.1;
+					// Start the animation
+					isAnimating = true;
+					// Once the movement is complete, move back to the original position after a delay
+					setTimeout(() => {	
+						group.position.z = 10;
+						targetZ = 0;
+						hasReset = true;
+						rotationSpeed =  0.001;
+
+					}, animationDuration); // 500ms delay before returning
+					setTimeout(() => {	
+						isAnimating = false;
+						animationStartTime = null;
+					}, 6000);
+				
+			}
+		}
+				
 
 		
 		function render( time ) {
@@ -193,7 +227,7 @@
 			time *= 0.001;
 
 			if(model){
-				group.rotation.z -= 0.001;
+				group.rotation.z -= rotationSpeed;
 			}
 			
 			for ( let i = 0, l = cubes.length; i < l; i ++ ) {
@@ -203,6 +237,23 @@
 					
 
 			}
+
+			 if (isAnimating) {
+				if (!animationStartTime) {
+					animationStartTime = time;
+				}
+				const elapsed = time - animationStartTime;
+
+				// Calculate the progress of the animation
+				const progress = Math.min(elapsed / animationDuration, 1);
+
+				// Linear interpolation (lerp) to smoothly transition the Z position
+				group.position.z = THREE.MathUtils.lerp(group.position.z, targetZ, progress);
+	
+			}
+
+
+
 			
 			renderer.render( scene, camera );
 
