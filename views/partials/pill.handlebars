@@ -13,7 +13,62 @@
 	import { MeshSurfaceSampler } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/math/MeshSurfaceSampler.js';
 
 
+
+
 	async function  main() {
+
+		
+		const divValue = 100;
+		const scales = [0.5,0.5,0.5,0.5];
+		const param1 = document.querySelector("#param1");
+		function listener1() {
+				scales[0] = param1.value/divValue;
+			};
+		param1.addEventListener("input", function() {
+				listener1();
+				param1.addEventListener("change", listener1);
+			});
+		param1.addEventListener("change", function() {
+				listener1();
+				param1.removeEventListener("input", listener1);
+			});
+		
+		const param2 = document.querySelector("#param2");
+		function listener2() {
+				scales[1] = param2.value/divValue;
+			};
+		param2.addEventListener("input", function() {
+				listener2();
+				param2.addEventListener("change", listener2);
+			});
+		param2.addEventListener("change", function() {
+				listener2();
+				param2.removeEventListener("input", listener2);
+			});
+		const param3 = document.querySelector("#param3");
+		function listener3() {
+				scales[2] = param3.value/divValue;
+			};
+		param3.addEventListener("input", function() {
+				listener3();
+				param3.addEventListener("change", listener3);
+			});
+		param3.addEventListener("change", function() {
+				listener3();
+				param3.removeEventListener("input", listener3);
+			});
+		const param4 = document.querySelector("#param4");
+		function listener4() {
+				scales[3] = param4.value/divValue;
+			};
+		param4.addEventListener("input", function() {
+				listener4();
+				param4.addEventListener("change", listener4);
+			});
+		param4.addEventListener("change", function() {
+				listener4();
+				param4.removeEventListener("input", listener4);
+			});
 
 		const canvas = document.querySelector( '#c' );
 		const renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true, canvas } );
@@ -23,9 +78,10 @@
 		camera.position.z =5;
 
 		const scene = new THREE.Scene();
-
+		const group = new THREE.Group();
 
 		let model;
+		let cubes = [];
 
 
 	  	const hdrEquirect = new RGBELoader().load(
@@ -37,36 +93,92 @@
 			);
 		const material = new THREE.MeshPhysicalMaterial({
 			color: 'rgb(0, 255, 47)',    // red (can also use a CSS color string here)
-					transmission: 0.3,
-			thickness: 3,
+			transmission: 0.3,
 			roughness: 1,
-			envMap: hdrEquirect
-		
+			envMap: hdrEquirect,
+	
 
 		});
+
+		const mat = new THREE.MeshPhongMaterial({
+			color: 'rgb(0, 255, 47)',
+			metalness: 0.1
+			});
+		const mat2 = new THREE.MeshPhongMaterial({
+			color: 'rgb(255, 0, 255)',
+			metalness: 0.1		
+			});
+		const mat3 = new THREE.MeshPhongMaterial({
+			color: 'rgb(0,0,255)', 
+			metalness: 0.1		
+			});
+		const mat4 = new THREE.MeshPhongMaterial({
+			color: 'rgb(255, 0,0)',
+			metalness: 0.1		
+			});
+		const mats = [mat,mat2,mat3,mat4];
+
+
 		const transparentmaterial = new THREE.MeshPhysicalMaterial({
-			transmission: 0.8,
-			thickness: 3,
+			transmission: 0.9,
 			roughness: 1,
-			envMap: hdrEquirect
+			envMap: hdrEquirect,
+			depthWrite: false,
+			transparent:  true,
 	
 		});
 		const loader = new GLTFLoader().setPath( '/glb/' );
 		loader.load( 'pill.glb', async function ( gltf ) {
 					model = gltf.scene;		
-					model.children[0].material = material;
-					model.children[1].material = transparentmaterial;
+					model.children[0].children[0].material = material;
+					model.children[0].children[1].material = transparentmaterial;
 					model.scale.set(0.4,0.4,0.4);
-					scene.add( model );
+					model.children[0].children[1].renderOrder = 2;
+					model.children[0].children[0].renderOrder = 2;
+					group.add(model);
+					
+					const color =  "rgb(0, 255, 47)";
+					const intensity = 3;
+					const light = new THREE.PointLight( color, intensity );
+					light.position.set( 0,0, 0  );
+
+
+				
+					const geometries = [
+					new THREE.BoxGeometry(),
+					new THREE.BoxGeometry(),
+					new THREE.BoxGeometry( ),
+					new THREE.BoxGeometry( ),
+					];
+
+
+					for ( let i = 0, l = geometries.length; i < l; i ++ ) {
+
+						const angle = ( i / l ) * Math.PI * 2;
+
+						const geometry = geometries[ i ];
+						const mesh = new THREE.Mesh( geometry, mats[i] );
+						mesh.position.x = 0.1+i/6;
+						
+						mesh.rotation.set(Math.random(),Math.random(), Math.random() )
+						mesh.renderOrder = 1;
+						cubes.push(mesh);
+						group.add(mesh);
+					
+
+					}
+					scene.add(group);
+
+
 					render();
 			
 		} );
 		{
 
-			const color =  "rgb(0, 255, 47)";
+			const color =  "rgb(255, 255, 255)";
 			const intensity = 3;
 			const light = new THREE.DirectionalLight( color, intensity );
-			light.position.set( 1, 2,0  );
+			light.position.set( 1,2, 0  );
 			scene.add( light );
 		}
 
@@ -80,9 +192,17 @@
 			time *= 0.001;
 
 			if(model){
-				model.rotation.z += 0.001;
-			
+				group.rotation.z -= 0.001;
 			}
+			
+			for ( let i = 0, l = cubes.length; i < l; i ++ ) {
+
+				const scale = scales[i] /1.5;
+				cubes[i].scale.set(scale,scale,scale);
+					
+
+			}
+			
 			renderer.render( scene, camera );
 
 			requestAnimationFrame( render );

@@ -15,27 +15,105 @@
 			import { MeshSurfaceSampler } from 'three/addons/math/MeshSurfaceSampler.js';
 			import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 			import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
-            	import {RGBELoader} from "https://cdn.jsdelivr.net/npm/three@0.124/examples/jsm/loaders/RGBELoader.js"
+            import {RGBELoader} from "https://cdn.jsdelivr.net/npm/three@0.124/examples/jsm/loaders/RGBELoader.js"
 
+			let camera, renderer;
 
-			let camera, scene, renderer;
+			const scene = new THREE.Scene();
+
 		    const canvas = document.querySelector( '#c' );
+			const param1 = document.querySelector("#param1");
+			function listener1() {
+				api.count = param1.value/10;
+				stemMesh1.count = api.count;
+			};
+			param1.addEventListener("input", function() {
+				listener1();
+				param1.addEventListener("change", listener1);
+			});
+			param1.addEventListener("change", function() {
+				listener1();
+				param1.removeEventListener("input", listener1);
+			});
+			const param2 = document.querySelector("#param2");
+			function listener2() {
+				api2.count = param2.value/10;
+				stemMesh2.count = api2.count;
+			};
+			param2.addEventListener("input", function() {
+				listener2();
+				param2.addEventListener("change", listener2);
+			});
+			param2.addEventListener("change", function() {
+				listener2();
+				param2.removeEventListener("input", listener2);
+			});
+			const param3 = document.querySelector("#param3");
+			function listener3() {
+				api3.count = param3.value/10;
+				stemMesh3.count = api3.count;
+			};
+			param3.addEventListener("input", function() {
+				listener3();
+				param3.addEventListener("change", listener3);
+			});
+			param3.addEventListener("change", function() {
+				listener3();
+				param3.removeEventListener("input", listener3);
+			});
+			const param4 = document.querySelector("#param4");
+			function listener4() {
+				api4.count = param4.value;
+				stemMesh4.count = api4.count;
+			};
+			param4.addEventListener("input", function() {
+				listener4();
+				param4.addEventListener("change", listener4);
+			});
+			param4.addEventListener("change", function() {
+				listener4();
+				param4.removeEventListener("input", listener4);
+			});
 
 			const api = {
-
-				count: 2000,
+				count: 5,
 				distribution: 'random',
 				resample: resample,
 				surfaceColor: 0xFFF784,
 				backgroundColor: 0xE39469,
-
+			};
+			const api2 = {
+				count: 5,
+				distribution: 'random',
+				resample: resample,
+				surfaceColor: 0xFFF784,
+				backgroundColor: 0xE39469,
+			};
+			const api3 = {
+				count: 5,
+				distribution: 'random',
+				resample: resample,
+				surfaceColor: 0xFFF784,
+				backgroundColor: 0xE39469,
+			};
+			const api4 = {
+				count: 5,
+				distribution: 'random',
+				resample: resample,
+				surfaceColor: 0xFFF784,
+				backgroundColor: 0xE39469,
 			};
 
-			let stemMesh, blossomMesh;
-			let stemGeometry, blossomGeometry;
-			let stemMaterial, blossomMaterial;
+			let stemMesh1;
+			let stemMesh2;
+			let stemMesh3;
+			let stemMesh4;
+			let stemGeometry;
 
 			let sampler;
+			let surface;
+			let model;
+
 			const count = api.count;
 			const ages = new Float32Array( count );
 			const scales = new Float32Array( count );
@@ -45,36 +123,86 @@
 			const _normal = new THREE.Vector3();
 			const _scale = new THREE.Vector3();
 
-			// let surfaceGeometry = new THREE.BoxGeometry( 10, 10, 10 ).toNonIndexed();
-			// const surfaceGeometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 ).toNonIndexed();
-			// const surfaceMaterial = new THREE.MeshLambertMaterial( { color: api.surfaceColor, wireframe: false } );
-			//const surface = new THREE.Mesh( surfaceGeometry, surfaceMaterial );
+			const count2 = api2.count;
+			const ages2 = new Float32Array( count );
+			const scales2 = new Float32Array( count );
+			const dummy2 = new THREE.Object3D();
 
-         
-			let surface;
-            let model;
+			const _position2 = new THREE.Vector3();
+			const _normal2 = new THREE.Vector3();
+			const _scale2 = new THREE.Vector3();
+
+			const count3 = api3.count;
+			const ages3 = new Float32Array( count );
+			const scales3 = new Float32Array( count );
+			const dummy3 = new THREE.Object3D();
+
+			const _position3 = new THREE.Vector3();
+			const _normal3 = new THREE.Vector3();
+			const _scale3 = new THREE.Vector3();
+
+			const count4 = api4.count;
+			const ages4 = new Float32Array( count );
+			const scales4 = new Float32Array( count );
+			const dummy4 = new THREE.Object3D();
+
+			const _position4 = new THREE.Vector3();
+			const _normal4 = new THREE.Vector3();
+			const _scale4 = new THREE.Vector3();
+
 
             const hdrEquirect = new RGBELoader().load(
 			"glb/env.hdr",
 				() => {
 					hdrEquirect.mapping = THREE.EquirectangularReflectionMapping;
+					scene.environment =hdrEquirect;
 				}
 			);
+			
+			const mat = new THREE.MeshNormalMaterial();
 
-            const material = new THREE.MeshPhysicalMaterial({
+            const material = new THREE.MeshPhongMaterial({
                 color: 'rgb(0, 255, 47)',    // red (can also use a CSS color string here)
-                transmission: 0.3,
-                thickness: 3,
-                roughness: 1,
-            
+                transmission: 0.8,
+				roughness: 0,
+            });
+			const material2 = new THREE.MeshPhongMaterial({
+                color: 'rgb(0,0,150)',    // red (can also use a CSS color string here)
+                transmission: 0.8,
+				roughness: 1,
+            });
+			const material3 = new THREE.MeshBasicMaterial({
+                color: 'rgb(255,0,255)',    // red (can also use a CSS color string here)
+            	transmission: 0.1,
+				roughness: 1,
+            });
 
+			const material4 = new THREE.MeshPhongMaterial({
+                color: 'rgb(0,255,255)',    // red (can also use a CSS color string here)
+                transmission: 0.8,
+				roughness: 0.5,
+				flatShading: true,
             });
-            const transparentmaterial = new THREE.MeshPhysicalMaterial({
-                transmission: 0.9,      
-                roughness: 1,
-                color: 'rgb(0, 255, 47)',
-        
-            });
+
+
+			const transparentmaterial = new THREE.MeshPhysicalMaterial({
+				transmission: 1,
+				roughness: 0,
+				envMap: hdrEquirect,
+	
+				color: 0xffffff,
+				metalness: 0.1,
+				roughness: 0.2,
+
+				reflectivity: 1,
+		
+				envMapIntensity: 10,
+				clearcoat: 0,
+				clearcoatRoughness: 0.1,
+		
+		
+
+			});
 
 			// Source: https://gist.github.com/gre/1650294
 			const easeOutCubic = function ( t ) {
@@ -91,112 +219,88 @@
 
 			};
 
-			const loader = new GLTFLoader();
+			surface = new THREE.Mesh( new THREE.CapsuleGeometry( 0.4, 1, 20,50 ), transparentmaterial );
+			const _stemMesh = new THREE.SphereGeometry( 0.01 )
 
-			loader.load( 'glb/pill.glb', function ( gltf ) {
+			stemGeometry = _stemMesh.clone();
 
-
-		        model = gltf.scene;		
-				model.children[0].material = material;
-				model.children[1].material = transparentmaterial;
-			    model.scale.set(1,1,1);
-				
-                surface = new THREE.Mesh( new THREE.CapsuleGeometry( 1, 3, 4, 8 ), transparentmaterial );
-				const _stemMesh = new THREE.SphereGeometry( 0.01 )
-
-				stemGeometry = _stemMesh.clone();
-
-				const defaultTransform = new THREE.Matrix4()
+			const defaultTransform = new THREE.Matrix4()
 					.makeRotationX( Math.PI )
 					.multiply( new THREE.Matrix4().makeScale( 7, 7, 7 ) );
 
-				stemGeometry.applyMatrix4( defaultTransform );
-				stemMaterial = material;
+			stemGeometry.applyMatrix4( defaultTransform );
 
-				stemMesh = new THREE.InstancedMesh( stemGeometry, stemMaterial, count );
+			stemMesh1 = new THREE.InstancedMesh( stemGeometry, mat, count );
+			stemMesh1.instanceMatrix.setUsage( THREE.DynamicDrawUsage );
 
-				// Instance matrices will be updated every frame.
-				stemMesh.instanceMatrix.setUsage( THREE.DynamicDrawUsage );
+			stemMesh2 = new THREE.InstancedMesh( stemGeometry, material2, count2 );
+			stemMesh2.instanceMatrix.setUsage( THREE.DynamicDrawUsage );
 
-				resample();
+			stemMesh3 = new THREE.InstancedMesh( stemGeometry, material3, count3 );
+			stemMesh3.instanceMatrix.setUsage( THREE.DynamicDrawUsage );
 
-				init();
+			stemMesh4 = new THREE.InstancedMesh( stemGeometry, material4, count4 );
+			stemMesh4.instanceMatrix.setUsage( THREE.DynamicDrawUsage );
 
-			} );
+
+			resample();
+
+			init();
+
+
+
+
+
 
 			function init() {
 
 
-
                 camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 20 );
-		        camera.position.z =10;
+		       	camera.position.z =5;
                 camera.lookAt( 0, 0, 0 );
+			    scene.environment = hdrEquirect;
 
-				//
-
-				scene = new THREE.Scene();
-			    scene.environment =hdrEquirect;
-
-				const pointLight = new THREE.PointLight( 0xAA8899, 2.5, 0, 0 );
-				pointLight.position.set( 50, - 25, 75 );
-				scene.add( pointLight );
-
-				scene.add( new THREE.AmbientLight( 0xffffff, 3 ) );
-
-				//
-	            scene.add( surface );
-				scene.add( stemMesh );
-
-			//
-
-				const gui = new GUI();
-				gui.add( api, 'count', 0, count ).onChange( function () {
-
-					stemMesh.count = api.count;
 			
 
-				} );
+				{
 
-	
-				gui.add( api, 'distribution' ).options( [ 'random', 'weighted' ] ).onChange( resample );
-				gui.add( api, 'resample' );
+					const color =  "rgb(0, 255, 47)";
+					const intensity = 3;
+					const light = new THREE.DirectionalLight( color, intensity );
+					light.position.set( 1,2,0 );
+					scene.add( light );
 
-				//
+					const alight = new THREE.AmbientLight( "rgb(255, 255, 255)", intensity );
+					scene.add( alight );
 
-				
+				}
+				let surfaceMin = surface.clone();
+				surfaceMin.material = material;
+				surfaceMin.scale.set(0.4,0.4,0.4);
+				scene.add(surfaceMin)
+				scene.add(surface );
+				scene.add( stemMesh1 );
+				scene.add( stemMesh2 );
+				scene.add( stemMesh3 );
+				scene.add( stemMesh4 );
+
 			    renderer = new THREE.WebGLRenderer( { antialias: true,  alpha: true, canvas } );
+
+
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				renderer.setAnimationLoop( animate );
 
-				//
-
-
-				//
-
 				window.addEventListener( 'resize', onWindowResize );
-
 			}
 
 			function resample() {
 
 				const vertexCount = surface.geometry.getAttribute( 'position' ).count;
 
-				console.info( 'Sampling ' + count + ' points from a surface with ' + vertexCount + ' vertices...' );
-
-				//
-
-				console.time( '.build()' );
-
 				sampler = new MeshSurfaceSampler( surface )
 					.setWeightAttribute( api.distribution === 'weighted' ? 'uv' : null )
 					.build();
-
-				console.timeEnd( '.build()' );
-
-				//
-
-				console.time( '.sample()' );
 
 				for ( let i = 0; i < count; i ++ ) {
 
@@ -206,11 +310,35 @@
 					resampleParticle( i );
 
 				}
+				for ( let i = 0; i < count2; i ++ ) {
 
-				console.timeEnd( '.sample()' );
+					ages2[ i ] = Math.random();
+					scales2[ i ] = scaleCurve( ages2[ i ] );
 
-				stemMesh.instanceMatrix.needsUpdate = true;
+					resampleParticle2( i );
 
+				}
+				for ( let i = 0; i < count3; i ++ ) {
+
+					ages3[ i ] = Math.random();
+					scales3[ i ] = scaleCurve( ages3[ i ] );
+
+					resampleParticle3( i );
+				}
+
+				for ( let i = 0; i < count4; i ++ ) {
+
+					ages4[ i ] = Math.random();
+					scales4[ i ] = scaleCurve( ages4[ i ] );
+
+					resampleParticle4( i );
+
+				}
+
+				stemMesh1.instanceMatrix.needsUpdate = true;
+				stemMesh2.instanceMatrix.needsUpdate = true;
+				stemMesh3.instanceMatrix.needsUpdate = true;
+				stemMesh4.instanceMatrix.needsUpdate = true;
 			}
 
 			function resampleParticle( i ) {
@@ -223,15 +351,56 @@
 				dummy.lookAt( _normal );
 				dummy.updateMatrix();
 
-				stemMesh.setMatrixAt( i, dummy.matrix );
+				stemMesh1.setMatrixAt( i, dummy.matrix );
 
 			}
 
+			function resampleParticle2( i ) {
+
+				sampler.sample( _position2, _normal2 );
+				_normal.add( _position2 );
+
+				dummy2.position.copy( _position2 );
+				dummy2.scale.set( scales2[ i ], scales2[ i ], scales2[ i ] );
+				dummy2.lookAt( _normal2 );
+				dummy2.updateMatrix();
+
+				stemMesh2.setMatrixAt( i, dummy2.matrix );
+
+			}
+
+			function resampleParticle3( i ) {
+
+				sampler.sample( _position3, _normal2 );
+				_normal.add( _position3 );
+
+				dummy3.position.copy( _position3 );
+				dummy3.scale.set( scales3[ i ], scales3[ i ], scales3[ i ] );
+				dummy3.lookAt( _normal3 );
+				dummy3.updateMatrix();
+
+				stemMesh3.setMatrixAt( i, dummy3.matrix );
+
+			}
+
+			function resampleParticle4( i ) {
+
+				sampler.sample( _position4, _normal2 );
+				_normal.add( _position4 );
+
+				dummy4.position.copy( _position4 );
+				dummy4.scale.set( scales4[ i ], scales4[ i ], scales4[ i ] );
+				dummy4.lookAt( _normal4 );
+				dummy4.updateMatrix();
+
+				stemMesh4.setMatrixAt( i, dummy4.matrix );
+
+			}
 			function updateParticle( i ) {
 
 				// Update lifecycle.
 
-				ages[ i ] += 0.005;
+				ages[ i ] += 0.001;
 
 				if ( ages[ i ] >= 1 ) {
 
@@ -245,16 +414,103 @@
 				}
 
 				// Update scale.
-
 				const prevScale = scales[ i ];
-				scales[ i ] = scaleCurve( ages[ i ] );
+				scales[ i ] = scaleCurve( ages[ i ] ) + api.count/70;
 				_scale.set( scales[ i ] / prevScale, scales[ i ] / prevScale, scales[ i ] / prevScale );
 
 				// Update transform.
-
-				stemMesh.getMatrixAt( i, dummy.matrix );
+				stemMesh1.getMatrixAt( i, dummy.matrix );
 				dummy.matrix.scale( _scale );
-				stemMesh.setMatrixAt( i, dummy.matrix );
+				stemMesh1.setMatrixAt( i, dummy.matrix );
+
+			}
+
+			function updateParticle2( i ) {
+
+				// Update lifecycle.
+
+				ages2[ i ] += 0.001;
+
+				if ( ages2[ i ] >= 1 ) {
+
+					ages2[ i ] = 0.001;
+					scales2[ i ] = scaleCurve( ages2[ i ] );
+
+					resampleParticle2( i );
+
+					return;
+
+				}
+
+				// Update scale.
+				const prevScale = scales2[ i ];
+				scales2[ i ] = scaleCurve( ages2[ i ] )+ api2.count/70;
+				_scale2.set( scales2[ i ] / prevScale, scales2[ i ] / prevScale, scales2[ i ] / prevScale );
+
+				// Update transform.
+				stemMesh2.getMatrixAt( i, dummy2.matrix );
+				dummy2.matrix.scale( _scale2 );
+				stemMesh2.setMatrixAt( i, dummy2.matrix );
+
+			}
+
+			function updateParticle3( i ) {
+
+				// Update lifecycle.
+
+				ages3[ i ] += 0.001;
+
+				if ( ages3[ i ] >= 1 ) {
+
+					ages3[ i ] = 0.001;
+					scales3[ i ] = scaleCurve( ages3[ i ] );
+
+					resampleParticle3( i );
+
+					return;
+
+				}
+
+				// Update scale.
+				const prevScale = scales3[ i ];
+				scales3[ i ] = scaleCurve( ages3[ i ] ) + api3.count/70;
+				_scale3.set( scales3[ i ] / prevScale, scales3[ i ] / prevScale, scales3[ i ] / prevScale );
+
+				// Update transform.
+				stemMesh3.getMatrixAt( i, dummy3.matrix );
+				dummy3.matrix.scale( _scale3 );
+				stemMesh3.setMatrixAt( i, dummy3.matrix );
+
+			}
+
+			function updateParticle4( i ) {
+
+				// Update lifecycle.
+
+				ages4[ i ] += 0.001;
+
+				if ( ages4[ i ] >= 1 ) {
+
+					ages4[ i ] = 0.001;
+					scales4[ i ] = scaleCurve( ages4[ i ] );
+
+
+					resampleParticle4( i );
+
+					return;
+
+				}
+
+				// Update scale.
+				const prevScale = scales4[ i ];
+				scales4[ i ] = scaleCurve( ages4[ i ] ) + api4.count/70;
+				_scale4.set( scales4[ i ] / prevScale, scales4[ i ] / prevScale, scales4[ i ] / prevScale );
+
+
+				// Update transform.
+				stemMesh4.getMatrixAt( i, dummy4.matrix );
+				dummy4.matrix.scale( _scale4 );
+				stemMesh4.setMatrixAt( i, dummy4.matrix );
 
 			}
 
@@ -267,32 +523,56 @@
 
 			}
 
-			//
-
 			function animate() {
 				render();
 			}
 
 			function render() {
 
-				if ( stemMesh  ) {
+				const time = Date.now() * 0.001;
+				scene.rotation.z -= 0.001;
 
-					const time = Date.now() * 0.001;
-
-					// scene.rotation.x = Math.sin( time / 4 );
-					scene.rotation.y = Math.sin( time / 10 );
-               
-                    scene.rotation.z = Math.sin( time / 10 );
-
+				if ( stemMesh1  ) {
 					for ( let i = 0; i < api.count; i ++ ) {
 						updateParticle( i );
 					}
 
-					stemMesh.instanceMatrix.needsUpdate = true;
-
-					stemMesh.computeBoundingSphere();
+					stemMesh1.instanceMatrix.needsUpdate = true;
+					stemMesh1.computeBoundingSphere();
 
 				}
+
+				if ( stemMesh2  ) {
+					for ( let i = 0; i < api2.count; i ++ ) {
+						updateParticle2( i );
+					}
+
+					stemMesh2.instanceMatrix.needsUpdate = true;
+					stemMesh2.computeBoundingSphere();
+
+				}
+
+
+				if ( stemMesh3  ) {
+					for ( let i = 0; i < api3.count; i ++ ) {
+						updateParticle3( i );
+					}
+
+					stemMesh3.instanceMatrix.needsUpdate = true;
+					stemMesh3.computeBoundingSphere();
+
+				}
+
+				if ( stemMesh4  ) {
+					for ( let i = 0; i < api4.count; i ++ ) {
+						updateParticle4( i );
+					}
+
+					stemMesh4.instanceMatrix.needsUpdate = true;
+					stemMesh4.computeBoundingSphere();
+
+				}
+
 
 				renderer.render( scene, camera );
 
