@@ -1,9 +1,18 @@
-
+{{!-- 
         {{#if shouldLogIn}}
             {{>cookies}}
-        {{/if}}
+        {{/if}} --}}
 
         {{>pill}}
+        <div class="header">
+            {{!-- {{#if name}} --}}
+            <p> hello {{name}}</p>
+            <p>manipulate the AI</p>
+            {{!-- {{/if}} --}}
+        </div>
+
+        <script src="/socket.js" type="module"> </script>
+
         <a class="btn"id="submit" href="" title="">FEED</a><span class="color color--blue" data-value="1"></span><span class="color color--orange" data-value="1"></span><span class="color color--green" data-value="1"></span><span class="color color--white" data-value="1"></span>
 
         <div class="sliders">
