@@ -2,6 +2,12 @@ const express = require('express');
 const dotenv = require('dotenv');
 const handlebars = require('express-handlebars');
 const databaseActions = require("./utils/database");
+const cors = require("cors");
+// const { cloudinary } = require("./utils/cloudinary");
+// const webrtc = require("wrtc");
+const bodyParser = require("body-parser");
+var path = require("path");
+
 
 dotenv.config();
 const app = express();
@@ -16,6 +22,20 @@ app.use(express.static("./utils"));
 ///handebars setup
 app.engine("handlebars", handlebars.engine()); //handlebars is construction languae
 app.set("view engine", "handlebars"); //handlebar is templating language
+
+
+
+
+const stun = require("stun");
+
+stun.request("stun.l.google.com:19302", (err, res) => {
+  if (err) {
+    console.error("stun doesnt work", err);
+  } else {
+    const { address } = res.getXorAddress();
+    console.log("your ip", address);
+  }
+});
 
 ///cookie-setup
 const cookieSession = require('cookie-session');
@@ -44,17 +64,16 @@ app.use(function(req, res, next) {
   next();
 });  
 
+app.use(cors());
+// app.use(router);
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
-// app.get("/cookies", (req, res) => {
-//   if (req.cookies.authenticated != "true") {
-//       console.log("cookie isnt authenticated");
-//       res.render("cookies", {
-//         layout: "main"
-//       });
-//   } else {
-//     res.redirect("/");
-//   }
-// });
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+
+
+
 
 
 app.get("/", (req, res) => {
