@@ -99,9 +99,6 @@ function sleep(ms) {
 var GameSocketID;
 
 // App Code starts here
-
-console.log('Starting Socket.IO demo server', );
-
 io.on('connection', (socket) => {
 
   socket.join(roomName);
@@ -121,10 +118,9 @@ io.on('connection', (socket) => {
 
   socket.on("hello", (data) => {
 		console.log("someone says hi", socket.id, data);
-
     io.to(GameSocketID).emit('hello', data);
-
     socket.emit("hello", data);
+
 	});
 	socket.on('Goodbye', async (data) => {
 		console.log('[' + (new Date()).toUTCString() + '] Client said "' + data + '" - The server will disconnect the client in five seconds. You can now abort the process (and restart it afterwards) to see an auto reconnect attempt.');
@@ -168,7 +164,8 @@ app.get("/", (req, res) => {
     databaseActions
       .getUser(req.cookies.id)
       .then(result => {
-        res.send('has user', req.cookies.id);
+        console.log("has user", result.rows[0].username, req.cookies.id, result.rows[0].id);
+
         res.render("frontpage", {
           layout: "main", 
           shouldLogIn: false,
@@ -194,13 +191,12 @@ app.get("/", (req, res) => {
 app.post("/cookies",  (req, res) => {
   if (req.body.yes == "") {
     let username = req.body.username;
-
     console.log("sending to database", req.body, username);
     databaseActions
           .createUser(username)
           .then(result => {
             console.log("cookie authenticated");
-            console.log("created user", result.rows[0].username);
+            console.log("created user", result.rows[0].username, result.rows[0].id);
             res.cookie("authenticated", "true");
             res.cookie("id", result.rows[0].id); 
             res.render("frontpage", {

@@ -22,18 +22,21 @@ button.addEventListener('click', sendMessage);
 function sendMessage() {
   button.removeEventListener('click', sendMessage);
 
-  const param1 = document.querySelector("#param1");
-  const param2 = document.querySelector("#param2");
-  const param3 = document.querySelector("#param3");
-  const param4 = document.querySelector("#param4");
+  var dataObject = {
 
-    socket.emit('message',  param1,param2,param3,param4);
-    socket.emit("hello", param1.value,param2.value,param3.value,param4.value);
+    param1: document.querySelector("#param1").value,
+    param2: document.querySelector("#param2").value,
+    param3: document.querySelector("#param3").value,
+    param4: document.querySelector("#param4").value
+}
 
-    button.classList.add('btn--clicked');
-    button.innerHTML = "";
+  socket.emit('message',  dataObject);
+  socket.emit("hello", dataObject);
+
+  button.classList.add('btn--clicked');
+  button.innerHTML = "";
     
-    setTimeout(()=>{
+  setTimeout(()=>{
       button.classList.remove("btn--clicked");
       button.innerHTML = "FEED";
       button.addEventListener('click', sendMessage);
