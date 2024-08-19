@@ -54,6 +54,35 @@ video{
             0 0 0.75em 0.25em var(--neongreen); */
             
     }
+.cookieContainer{
+      z-index: 99;
+       display: flex;
+       flex-direction: column;        
+       margin: 1rem;
+       position: fixed;
+       top: 0;
+       bottom: 0;
+       left:0;
+       right: 0;
+       border-radius: 40px;
+       padding: 1rem;
+       align-items: center;
+       justify-items: center;
+       justify-content: center;
+       background-color: var(--blue);
+       /* height: calc(100vh - 4rem); */
+       
+
+       border: 2px var(--neongreen) solid;
+       /* -webkit-box-shadow: inset 0 0 0.75em 0.25em var(--neongreen),
+           0 0 0.75em 0.25em var(--neongreen);
+       -moz-box-shadow: inset 0 0 0.75em 0.25em var(--neongreen),
+           0 0 0.75em 0.25em var(--neongreen);
+
+       box-shadow: inset 0 0 0.75em 0.25em var(--neongreen),
+           0 0 0.75em 0.25em var(--neongreen); */
+           
+   }
 
 body{
   background-color: var(--blue);
@@ -138,7 +167,7 @@ input[type=range]:focus::-ms-fill-upper {
   /* text-transform: uppercase;
   letter-spacing: 2.8px; */
   background-color: var(--neongreen);
-  border-color: white;
+  border-color: rgba(0,0,0,0);
   word-wrap: break-word;
   color: white;
   width: calc(100% - 6rem);
@@ -150,6 +179,39 @@ input[type=range]:focus::-ms-fill-upper {
   font-size: 2rem;
   transition: 0.6s cubic-bezier(0.01, 1.69, 0.99, 0.94);
 }
+
+.cookieContainer .btn{
+  width: 100%;
+}
+.cookieContainer form{
+  width: 100%;
+}
+.cookieContainer input{
+  font-size: 2rem;
+  height: 73px;
+  width: calc(100% - 0.5rem);
+  background: rgba(0,0,0,0);
+  border: 2px var(--neongreen) solid;
+  border-radius: 30rem;
+  /* padding-top: 10px;
+  padding-bottom: 10px; */
+  color: var(--neongreen);
+  margin-bottom: 1rem;
+  text-align: center;
+  color:var(--neongreen);
+}
+:focus{
+  outline: none;
+}
+::placeholder {
+  color: white;
+  opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder { /* Edge 12 -18 */
+  color: white;
+}
+
 
 .btn--clicked {
   transition: 0.6s cubic-bezier(0.01, 1.69, 0.99, 0.94);
