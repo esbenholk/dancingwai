@@ -42,7 +42,7 @@ stun.request("stun.l.google.com:19302", (err, res) => {
 
 ///cookie-setup
 const cookieSession = require('cookie-session');
-const csurf = require('csurf');
+// const csurf = require('csurf');
 const cookieParser = require("cookie-parser");
 
 app.use(cookieParser());
@@ -60,12 +60,12 @@ app.use(express.urlencoded({
   extended: false
 }));
 
-app.use(csurf({ cookie: false })); 
+// app.use(csurf({ cookie: false })); 
 
-app.use(function(req, res, next) {
-  res.locals.csrfToken = req.csrfToken();
-  next();
-});  
+// app.use(function(req, res, next) {
+//   res.locals.csrfToken = req.csrfToken();
+//   next();
+// });  
 
 app.use(cors());
 // app.use(router);
@@ -174,6 +174,8 @@ app.get("/", (req, res) => {
       
       })
       .catch(err => {
+        console.log("doesnt know user");
+
         res.render("frontpage", {
           layout: "main", 
           shouldLogIn: true
