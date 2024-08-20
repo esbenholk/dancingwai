@@ -99,11 +99,50 @@ function sleep(ms) {
 
 var GameSocketID;
 
+// Store users by room
+const users = {};
+
 // App Code starts here
 io.on('connection', (socket) => {
 
-  socket.join(roomName);
-	console.log('[' + (new Date()).toUTCString() + '] game connecting');
+
+
+  socket.on('joinRoom', ({ username }) => {
+    socket.join(roomName);
+
+    // Add the user to the room
+    if (!users[roomName]) {
+        users[roomName] = [];
+    }
+    users[roomName].push(username);
+
+    console.log(users);
+    
+    // Notify all users in the room about the new user
+    io.to(roomName).emit('roomUsers', {
+        room: roomName,
+        users: users[roomName]
+    });
+  });
+
+  // Handle user disconnection
+  socket.on('disconnect', () => {
+      for (let roomName in users) {
+          const index = users[roomName].indexOf(socket.username);
+          if (index !== -1) {
+              users[roomName].splice(index, 1);
+
+              // Notify all users in the room about the updated user list
+              io.to(roomName).emit('roomUsers', {
+                  room: roomName,
+                  users: users[roomName]
+              });
+
+              break;
+          }
+      }
+      console.log('A user disconnected');
+  });
 	
 
 	socket.on('connect', (data) => {

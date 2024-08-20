@@ -3,8 +3,3 @@ function updateTextInput(val, id) {
   }
 
 
-  function sendMessage() {
-    const input = document.getElementById('messageInput');
-    socket.emit('message', input.value);
-    input.value = '';
-  }

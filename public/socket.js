@@ -10,6 +10,16 @@ socket.on('message', (data) => {
     document.getElementById('messages').appendChild(li);
 });
 
+socket.on('roomUsers', ({ room, users }) => {
+  // Update the users list when someone joins or leaves the room
+  const userList = document.getElementById('userList');
+  userList.innerHTML = `
+      <ul>
+          ${users.map(user => `<li>${user}</li>`).join('')}
+      </ul>
+  `;
+});
+
 
 const button = document.querySelector('#submit');
 button.addEventListener('click',(e)=>{
@@ -21,6 +31,7 @@ button.addEventListener('click', sendMessage);
     
 function sendMessage() {
   button.removeEventListener('click', sendMessage);
+
 
   var dataObject = {
     name: document.querySelector("#username").innerHTML,
@@ -44,4 +55,17 @@ function sendMessage() {
     }, 3000);
 }
 
+
+
+const loginbutton = document.querySelector('#loginbtn');
+loginbutton.addEventListener('click',(e)=>{
+    e.preventDefault();
+    login();
+  })
+
+function login(){
+console.log("tries to join room", document.querySelector('#username').value);
+
+socket.emit('joinRoom', { username : document.querySelector('#username').value });
+}
 window.sendMessage = sendMessage;
