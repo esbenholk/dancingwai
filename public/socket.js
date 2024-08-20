@@ -34,7 +34,7 @@ function sendMessage() {
 
 
   var dataObject = {
-    name: document.querySelector("#username").innerHTML,
+    name: document.querySelector("#name").innerHTML,
     param1: document.querySelector("#param1").value,
     param2: document.querySelector("#param2").value,
     param3: document.querySelector("#param3").value,
@@ -58,14 +58,24 @@ function sendMessage() {
 
 
 const loginbutton = document.querySelector('#loginbtn');
-loginbutton.addEventListener('click',(e)=>{
+
+if(loginbutton){
+  loginbutton.addEventListener('click',(e)=>{
     e.preventDefault();
-    login();
+    login(document.querySelector('#username').value);
   })
-
-function login(){
-console.log("tries to join room", document.querySelector('#username').value);
-
-socket.emit('joinRoom', { username : document.querySelector('#username').value });
 }
+
+
+function login(name){
+  console.log("tries to join room", name);
+  socket.emit('joinRoom', { username : name });
+}
+
+window.onload = (event) => {
+  if(!loginbutton && document.querySelector("#name")){
+    login(document.querySelector("#name").innerHTML);
+  }
+};
+
 window.sendMessage = sendMessage;
