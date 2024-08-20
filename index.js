@@ -195,9 +195,9 @@ app.get("/", (req, res) => {
 
 
 app.post("/cookies",  (req, res) => {
-  if (req.body.yes == "") {
+  if (req.body.yes == "" && req.session.isNew) {
     let username = req.body.username;
-    console.log("sending to database", req.body, username);
+    console.log("sending to database", req.session.isNew, username);
     databaseActions
           .createUser(username)
           .then(result => {
@@ -209,7 +209,6 @@ app.post("/cookies",  (req, res) => {
               layout: "main",
               name: result.rows[0].username, 
               shouldLogIn: false,
-              loader: true
             });
           })
           .catch(err => {
@@ -225,21 +224,27 @@ app.post("/cookies",  (req, res) => {
     
     
   } else {
-    // databaseActions
-    // .getEveryone()
-    // .then(result => {
-  
-    //   res.render("nofun", {
-    //     layout: "destruction",
-    //     users: result.rows
-    //   });
+    databaseActions
+    .getUser(req.cookies.id)
+    .then(result => {
+      console.log("has user", result.rows[0].username, req.cookies.id, result.rows[0].id);
+
+      res.render("frontpage", {
+        layout: "main", 
+        shouldLogIn: false,
+        name:  result.rows[0].username,
+        greeting: "welcome back "
+      });
     
-    // })
-    // .catch(err => {
-    //   res.render("countdown", {
-    //     layout: "main"
-    // });
-    // });
+    })
+    .catch(err => {
+      console.log("doesnt know user");
+
+      res.render("frontpage", {
+        layout: "main", 
+        shouldLogIn: true
+      });
+  });
   }
 });
 
