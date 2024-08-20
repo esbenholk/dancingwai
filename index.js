@@ -173,7 +173,7 @@ app.get("/", (req, res) => {
         res.render("frontpage", {
           layout: "main", 
           shouldLogIn: false,
-          name: "brian"
+          name:  result.rows[0].username
         });
       
       })
@@ -205,12 +205,12 @@ app.post("/cookies",  (req, res) => {
             console.log("created user", result.rows[0].username, result.rows[0].id);
             res.cookie("authenticated", "true");
             res.cookie("id", result.rows[0].id); 
-            res.render("frontpage", {
-              layout: "main",
-              name: result.rows[0].username, 
-              shouldLogIn: false,
-              loader: true
-            });
+            // res.render("frontpage", {
+            //   layout: "main",
+            //   name: result.rows[0].username, 
+            //   shouldLogIn: false,
+            //   loader: true
+            // });
           })
           .catch(err => {
     
