@@ -57,24 +57,24 @@ function sendMessage() {
 
 
 
-const loginbutton = document.querySelector('#loginbtn');
+// const loginbutton = document.querySelector('#loginbtn');
 
-if(loginbutton){
-  loginbutton.addEventListener('click',(e)=>{
-    login(document.querySelector('#username').value);
-  })
-}
+// if(loginbutton){
+//   loginbutton.addEventListener('click',(e)=>{
+//     login(document.querySelector('#username').value);
+//   })
+// }
 
 
-function login(name){
-  console.log("tries to join room", name);
-  socket.emit('joinRoom', { username : name });
-}
+// function login(name){
+//   console.log("tries to join room", name);
+//   socket.emit('joinRoom', { username : name });
+// }
 
-window.onload = (event) => {
-  if(!loginbutton && document.querySelector("#name")){
-    login(document.querySelector("#name").innerHTML);
-  }
-};
+// window.onload = (event) => {
+//   if(!loginbutton && document.querySelector("#name")){
+//     login(document.querySelector("#name").innerHTML);
+//   }
+// };
 
 window.sendMessage = sendMessage;
