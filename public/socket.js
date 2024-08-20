@@ -13,6 +13,7 @@ socket.on('message', (data) => {
 socket.on('roomUsers', ({ room, users }) => {
   // Update the users list when someone joins or leaves the room
   const userList = document.getElementById('userList');
+
   userList.innerHTML = `
       <ul>
           ${users.map(user => `<p>${user.username}__<i>online</i>____${user.data?.param1}</p>`).join('')} 

@@ -118,7 +118,7 @@ io.on('connection', (socket) => {
 
     const user = {
       username: username,
-      data: null
+   
     }
     users[roomName].push(user);
 
@@ -155,9 +155,11 @@ io.on('connection', (socket) => {
 
               const index = users[roomName].map((o) => o.username).indexOf(socket.username);
               
-              console.log("updated user", result, index, users[roomName], socket.username);
+           
               users[roomName][index].data = result;
 
+
+              console.log("updated user", result, index, users[roomName], socket.username, users[roomName][index].data.param1);
 
               io.to(roomName).emit('roomUsers', {
                 room: roomName,
