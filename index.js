@@ -145,47 +145,6 @@ io.on('connection', (socket) => {
 
 
 
-app.get("/", (req, res) => {
-  if (req.session.isNew) {
-    // If no session exists, set a session ID and send a welcome message
-    res.render("frontpage", {
-      layout: "main", 
-      shouldLogIn: true
-    });
-    // req.session.id = 'user123'; // This can be any unique identifier
-  } else {
-    // If session exists, greet the user
-    // res.send('Welcome back! You are already logged in.');
-
-    console.log("has cookie  looks for user", req.cookies.id);
-
-    databaseActions
-      .getUser(req.cookies.id)
-      .then(result => {
-        console.log("has user", result.rows[0].username, req.cookies.id, result.rows[0].id);
-
-        res.render("frontpage", {
-          layout: "main", 
-          shouldLogIn: false,
-          name:  result.rows[0].username
-        });
-      
-      })
-      .catch(err => {
-        console.log("doesnt know user");
-
-        res.render("frontpage", {
-          layout: "main", 
-          shouldLogIn: true
-        });
-    });
-   
-  }
-  
- 
- 
-
-});
 
 
 app.post("/cookies",  (req, res) => {
@@ -199,11 +158,12 @@ app.post("/cookies",  (req, res) => {
             console.log("created user", result.rows[0].username, result.rows[0].id);
             res.cookie("authenticated", "true");
             res.cookie("id", result.rows[0].id); 
-            res.render("frontpage", {
-              layout: "main",
-              name: result.rows[0].username, 
-              shouldLogIn: false,
-            });
+            // res.render("frontpage", {
+            //   layout: "main",
+            //   name: result.rows[0].username, 
+            //   shouldLogIn: false,
+            // });
+            res.redirect("/");
           })
           .catch(err => {
   
@@ -241,6 +201,52 @@ app.post("/cookies",  (req, res) => {
   // });
   }
 });
+
+
+
+
+app.get("/", (req, res) => {
+  if (req.session.isNew) {
+    // If no session exists, set a session ID and send a welcome message
+    res.render("frontpage", {
+      layout: "main", 
+      shouldLogIn: true
+    });
+    // req.session.id = 'user123'; // This can be any unique identifier
+  } else {
+    // If session exists, greet the user
+    // res.send('Welcome back! You are already logged in.');
+
+    console.log("has cookie  looks for user", req.cookies.id);
+
+    databaseActions
+      .getUser(req.cookies.id)
+      .then(result => {
+        console.log("has user", result.rows[0].username, req.cookies.id, result.rows[0].id);
+
+        res.render("frontpage", {
+          layout: "main", 
+          shouldLogIn: false,
+          name:  result.rows[0].username,
+        });
+      
+      })
+      .catch(err => {
+        console.log("doesnt know user");
+
+        res.render("frontpage", {
+          layout: "main", 
+          shouldLogIn: true
+        });
+    });
+   
+  }
+  
+ 
+ 
+
+});
+
 
 app.use((request, response, next) => {
   if (request.cookies.authenticated != "true") {
