@@ -61,7 +61,6 @@ const loginbutton = document.querySelector('#loginbtn');
 
 if(loginbutton){
   loginbutton.addEventListener('click',(e)=>{
-    e.preventDefault();
     login(document.querySelector('#username').value);
   })
 }
