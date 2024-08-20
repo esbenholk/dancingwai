@@ -1,6 +1,6 @@
-    {{!-- {{#if shouldLogIn}}
+    {{#if shouldLogIn}}
         {{>cookies}}
-    {{/if}} --}}
+    {{/if}}
 
     {{>pill}}
 
@@ -38,9 +38,12 @@
             </div>
 
             <div class="carousel-item">
-                <div id="userList">
+                <div id="userListContainer">
                     <h3>players</h3>
-                    {{> players users=roomUsers}}
+                    <div id="userList">
+                         {{> players users=roomUsers}}
+                    </div>
+                   
                 </div>
             </div>
     

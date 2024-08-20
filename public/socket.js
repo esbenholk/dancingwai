@@ -15,7 +15,7 @@ socket.on('roomUsers', ({ room, users }) => {
   const userList = document.getElementById('userList');
   userList.innerHTML = `
       <ul>
-          ${users.map(user => `<li>${user}</li>`).join('')}
+          ${users.map(user => `<p>${user.username}__<i>online</i>____${user.data.param1}</p>`).join('')} 
       </ul>
   `;
 });

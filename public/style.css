@@ -390,7 +390,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 
 
-#userList{
+#userListContainer{
   background-color: var(--blue);
   width: calc(100% - 2rem);
   height: 100%;

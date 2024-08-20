@@ -115,7 +115,12 @@ io.on('connection', (socket) => {
     if (!users[roomName]) {
         users[roomName] = [];
     }
-    users[roomName].push(username);
+
+    const user = {
+      username: username,
+      data: null
+    }
+    users[roomName].push(user);
 
     console.log("adds user in room", socket.username);
 
@@ -147,6 +152,14 @@ io.on('connection', (socket) => {
           .updateEverything(data.name, data.param1, data.param2, data.param3, data.param4)
           .then(result => {
               console.log("updated user", result);
+
+              const index = users[roomName].indexOf(socket.username);
+              users[roomName][index].data = result;
+
+              io.to(roomName).emit('roomUsers', {
+                room: roomName,
+                users: users[roomName]
+            });
               
           })
           .catch(err => {
