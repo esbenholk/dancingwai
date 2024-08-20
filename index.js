@@ -151,10 +151,12 @@ io.on('connection', (socket) => {
     databaseActions
           .updateEverything(data.name, data.param1, data.param2, data.param3, data.param4)
           .then(result => {
-              console.log("updated user", result);
+              
 
               const index = users[roomName].indexOf(socket.username);
               users[roomName][index].data = result;
+
+              console.log("updated user", result, index, users[roomName][index].data);
 
               io.to(roomName).emit('roomUsers', {
                 room: roomName,
