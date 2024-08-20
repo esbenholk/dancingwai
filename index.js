@@ -154,9 +154,10 @@ io.on('connection', (socket) => {
               
 
               const index = users[roomName].indexOf(socket.username);
-              users[roomName][index].data = result;
+              
+              console.log("updated user", result, index, users[roomName], socket.username);
+              // users[roomName][index].data = result;
 
-              console.log("updated user", result, index, users[roomName][index].data);
 
               io.to(roomName).emit('roomUsers', {
                 room: roomName,
