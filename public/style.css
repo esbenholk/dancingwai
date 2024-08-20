@@ -3,10 +3,22 @@
   --blue: blue;
   --margin: 1rem;
 }
+*{
+  font-family: Arial, Helvetica, sans-serif;
+}
 
+ul,li,
 p{
   color: var(--neongreen);
   margin: 0;
+}
+ul,
+li{
+  list-style: none;
+}
+
+h3{
+  color: var(--neongreen);
 }
 
 video{
@@ -33,20 +45,14 @@ video{
 
 .container{
        z-index: 9;
-        display: flex;
-        flex-direction: column;        
-        margin: 1rem;
-        margin-top: 2rem;
+        margin: 2rem 1rem;
         position: fixed;
         top: 0;
         bottom: 0;
         left:0;
         right: 0;
         border-radius: 40px;
-        padding: 1rem;
-        align-items: center;
-        justify-items: center;
-        justify-content: space-between;
+
         /* height: calc(100vh - 4rem); */
         
 
@@ -60,15 +66,21 @@ video{
             0 0 0.75em 0.25em var(--neongreen); */
             
     }
+.footer,
 .header{
   z-index: 9;
   display: flex;
   justify-content: space-between;
   position: fixed;
-  top: 0;
   left:0;
   right: 0;
   margin: 0.5rem 1rem;
+}
+.footer{
+  bottom: 0;
+}
+.header{
+  top: 0;
 }
 .cookieContainer{
       z-index: 99;
@@ -375,3 +387,53 @@ input[type=range]:focus::-ms-fill-upper {
   width: 100%;
   height: 100%;
  }
+
+
+
+#userList{
+  background-color: var(--blue);
+  width: calc(100% - 2rem);
+  height: 100%;
+  border: 2px solid var(--neongreen);
+  border-radius: 40px;
+  padding: 1rem;
+
+}
+
+
+        /* Carousel container */
+        .carousel-container {
+          display: flex;
+          height: 100%;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+      }
+
+      /* Carousel item */
+      .carousel-item {
+          flex: 0 0 auto;
+          width: 100%;
+          height: 100%;
+          scroll-snap-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-direction: column;
+          box-sizing: border-box;
+          padding: 20px;
+      }
+
+
+
+      .footer button {
+          background-color: rgba(0,0,0,0);
+          color: var(--neongreen);
+          border: 2px solid var(--neongreen);
+          border-radius:50%;
+          cursor: pointer;
+      }
+
+      .footer button:disabled {
+          visibility: hidden;
+      }
