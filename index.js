@@ -146,19 +146,13 @@ io.on('connection', (socket) => {
 
 
 app.get("/", (req, res) => {
-
-  console.log(req.session.id, req.session.isNew, req.session);
   if (req.session.isNew) {
     // If no session exists, set a session ID and send a welcome message
     res.render("frontpage", {
       layout: "main", 
       shouldLogIn: true
     });
-
-
     // req.session.id = 'user123'; // This can be any unique identifier
-
-
   } else {
     // If session exists, greet the user
     // res.send('Welcome back! You are already logged in.');
@@ -195,7 +189,7 @@ app.get("/", (req, res) => {
 
 
 app.post("/cookies",  (req, res) => {
-  if (req.body.yes == "" && req.session.isNew) {
+  if (req.body.yes == "") {
     let username = req.body.username;
     console.log("sending to database", req.session.isNew, username);
     databaseActions
@@ -224,27 +218,27 @@ app.post("/cookies",  (req, res) => {
     
     
   } else {
-    databaseActions
-    .getUser(req.cookies.id)
-    .then(result => {
-      console.log("has user", result.rows[0].username, req.cookies.id, result.rows[0].id);
+  //   databaseActions
+  //   .getUser(req.cookies.id)
+  //   .then(result => {
+  //     console.log("has user", result.rows[0].username, req.cookies.id, result.rows[0].id);
 
-      res.render("frontpage", {
-        layout: "main", 
-        shouldLogIn: false,
-        name:  result.rows[0].username,
-        greeting: "welcome back "
-      });
+  //     res.render("frontpage", {
+  //       layout: "main", 
+  //       shouldLogIn: false,
+  //       name:  result.rows[0].username,
+  //       greeting: "welcome back "
+  //     });
     
-    })
-    .catch(err => {
-      console.log("doesnt know user");
+  //   })
+  //   .catch(err => {
+  //     console.log("doesnt know user");
 
-      res.render("frontpage", {
-        layout: "main", 
-        shouldLogIn: true
-      });
-  });
+  //     res.render("frontpage", {
+  //       layout: "main", 
+  //       shouldLogIn: true
+  //     });
+  // });
   }
 });
 
