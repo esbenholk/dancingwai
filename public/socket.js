@@ -23,7 +23,7 @@ function sendMessage() {
   button.removeEventListener('click', sendMessage);
 
   var dataObject = {
-
+    name: document.querySelector("#username").innerHTML,
     param1: document.querySelector("#param1").value,
     param2: document.querySelector("#param2").value,
     param3: document.querySelector("#param3").value,

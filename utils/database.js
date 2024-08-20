@@ -31,6 +31,13 @@ module.exports.checkHumanity = function checkHumanity(humanityCheck, id) {
     [humanityCheck, id]  
   );
 };
+
+module.exports.updateEverything = function checkHumanity(username, param1, param2, param3,param4) {
+  return database.query(
+    `UPDATE userdata SET momEnergy = momEnergy + $2, directorEnergy = directorEnergy + $3, domEnergy = domEnergy + + $4, gayEnergy = gayEnergy + $5 WHERE username=$1 RETURNING *`,
+    [username, param1, param2,param3,param4]  
+  );
+};
 module.exports.updateEmail = function updateEmail(email, id) {
   return database.query(
     `UPDATE userdata SET email = $1 WHERE id =$2 RETURNING *`,

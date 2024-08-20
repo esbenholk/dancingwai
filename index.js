@@ -118,7 +118,20 @@ io.on('connection', (socket) => {
 	});
 
   socket.on("hello", (data) => {
-		console.log("someone says hi", socket.id, data);
+		console.log("someone says hi", socket.id, data, data.name);
+
+    databaseActions
+          .updateEverything(data.name, data.param1, data.param2, data.param3, data.param4)
+          .then(result => {
+              console.log("updated user", result);
+              
+          })
+          .catch(err => {
+  
+            console.log("fucked it up", err);
+
+          });
+    
     io.to(GameSocketID).emit('hello', data);
     socket.emit("hello", data);
 
@@ -158,11 +171,7 @@ app.post("/cookies",  (req, res) => {
             console.log("created user", result.rows[0].username, result.rows[0].id);
             res.cookie("authenticated", "true");
             res.cookie("id", result.rows[0].id); 
-            // res.render("frontpage", {
-            //   layout: "main",
-            //   name: result.rows[0].username, 
-            //   shouldLogIn: false,
-            // });
+
             res.redirect("/");
           })
           .catch(err => {
@@ -177,28 +186,6 @@ app.post("/cookies",  (req, res) => {
     
     
     
-  } else {
-  //   databaseActions
-  //   .getUser(req.cookies.id)
-  //   .then(result => {
-  //     console.log("has user", result.rows[0].username, req.cookies.id, result.rows[0].id);
-
-  //     res.render("frontpage", {
-  //       layout: "main", 
-  //       shouldLogIn: false,
-  //       name:  result.rows[0].username,
-  //       greeting: "welcome back "
-  //     });
-    
-  //   })
-  //   .catch(err => {
-  //     console.log("doesnt know user");
-
-  //     res.render("frontpage", {
-  //       layout: "main", 
-  //       shouldLogIn: true
-  //     });
-  // });
   }
 });
 
@@ -214,11 +201,6 @@ app.get("/", (req, res) => {
     });
     // req.session.id = 'user123'; // This can be any unique identifier
   } else {
-    // If session exists, greet the user
-    // res.send('Welcome back! You are already logged in.');
-
-    console.log("has cookie  looks for user", req.cookies.id);
-
     databaseActions
       .getUser(req.cookies.id)
       .then(result => {
@@ -228,6 +210,7 @@ app.get("/", (req, res) => {
           layout: "main", 
           shouldLogIn: false,
           name:  result.rows[0].username,
+
         });
       
       })
