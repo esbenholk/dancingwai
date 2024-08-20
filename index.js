@@ -213,12 +213,11 @@ app.post("/cookies",  (req, res) => {
             });
           })
           .catch(err => {
-    
-            console.log("did not create anything");
+  
             res.render("frontpage", {
               layout: "main", 
               shouldLogIn: true,
-              alert: "i dont know u"
+              alert: "your name needs to be unique"
 
             });
           });

@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS userdata;
 
 CREATE TABLE userdata(
     id SERIAL primary key,
-    username VARCHAR,
+    username VARCHAR UNIQUE,
     orderAmount INTEGER,
     momEnergy INTEGER,
     directorEnergy INTEGER,
