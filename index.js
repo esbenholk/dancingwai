@@ -153,10 +153,10 @@ io.on('connection', (socket) => {
           .then(result => {
               
 
-              const index = users[roomName].indexOf(socket.username);
+              const index = users[roomName].map((o) => o.username).indexOf(socket.username);
               
               console.log("updated user", result, index, users[roomName], socket.username);
-              // users[roomName][index].data = result;
+              users[roomName][index].data = result;
 
 
               io.to(roomName).emit('roomUsers', {
@@ -189,7 +189,8 @@ io.on('connection', (socket) => {
 
 
     for (let roomName in users) {
-      const index = users[roomName].indexOf(socket.username);
+      const index = users[roomName].map((o) => o.username).indexOf(socket.username);
+
 
       console.log("removes user in room", index, socket.username);
       
