@@ -447,7 +447,8 @@ input[type=range]::-webkit-slider-thumb {
 #userListContainer{
   background-color: var(--blue);
   width: calc(100% - 2rem);
-  height: 100%;
+  height: calc(100% - 2rem);
+  overflow-y: hidden;
   border: 2px solid var(--neongreen);
   border-radius: 40px;
   padding: 1rem;

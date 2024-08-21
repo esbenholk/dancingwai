@@ -15,7 +15,13 @@ socket.on('roomUsers', ({ room, users }) => {
   const userList = document.getElementById('userList');
   let htmlString = `<ul>`;
 
-  for (let index = 0; index < 100; index++) {
+  // for (let index = 0; index < 100; index++) { 
+  //   addUsers();
+  // }
+
+  addUsers();
+
+  function addUsers(){
     users.forEach(user => {
       console.log(user);
       htmlString += `<li><p>${user.username}</br>_<i>online</i>_</p> `
@@ -32,8 +38,6 @@ socket.on('roomUsers', ({ room, users }) => {
       }
   
     });
-  
-    
   }
 
   htmlString += `</ul>`;
