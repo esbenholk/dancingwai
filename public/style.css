@@ -6,6 +6,14 @@
 *{
   font-family: Arial, Helvetica, sans-serif;
 }
+html {
+  overflow:   scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
 
 ul,li,
 p{
@@ -141,8 +149,8 @@ h1,a{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: calc(100% - 4rem);
-  padding: 1rem 1rem;
+  width: calc(100% - 0rem);
+
 
 }
 .sliderContainer{
@@ -150,10 +158,24 @@ h1,a{
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
+  position: relative;
+  margin-left: 1.3rem;
 }
 .sliderContainer p{
  color: var(--neongreen)
 }
+.sliderContainer p:first-child{
+  color: var(--neongreen);
+  position: absolute;
+  bottom: 0;
+  transform: rotate(-90deg);
+  left: -1rem;
+  width: fit-content;
+  white-space: nowrap;
+  transform-origin: 0% 0%;
+  text-align: right;
+
+ }
 input[type=range]{
   -webkit-appearance: none;
   writing-mode: vertical-lr;
@@ -162,13 +184,25 @@ input[type=range]{
   vertical-align: bottom;
   height: calc(100% - 20px);
   width: 40px;
-  background: rgba(0,0,0,0);
+  /* background: rgba(0,0,0,0); */
   border: 2px var(--neongreen) solid;
   border-radius: 30rem;
   padding-top: 10px;
   padding-bottom: 10px;
-
 }
+#param1{
+  background: linear-gradient(to top, black 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,0)  100%);
+}
+#param2{
+  background: linear-gradient(to top, #00ffe8 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,0)  100%);
+}
+#param3{
+  background: linear-gradient(to top, #ff00ec 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,0)  100%);
+}
+#param4{
+  background: linear-gradient(to top, #d21526 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,0)  100%);
+}
+
 input[type=range]:focus {
   outline: none;
 }
@@ -181,9 +215,8 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 50%;
 }
 
-input[type=range]:focus::-ms-fill-upper {
-  background: pink;
-}
+
+
 
 .btn {
   position: relative;
@@ -195,7 +228,7 @@ input[type=range]:focus::-ms-fill-upper {
   border-color: rgba(0,0,0,0);
   word-wrap: break-word;
   color: white;
-  width: calc(100% - 6rem);
+  width: calc(100% - 2rem);
   padding: 1rem 1rem;
   max-height: 120px;
   /* font-size: 50px; */
@@ -419,7 +452,7 @@ input[type=range]:focus::-ms-fill-upper {
           height: 100%;
           scroll-snap-align: center;
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           justify-content: space-between;
           flex-direction: column;
           box-sizing: border-box;
@@ -431,6 +464,9 @@ input[type=range]:focus::-ms-fill-upper {
       .footer button {
           background-color: rgba(0,0,0,0);
           color: var(--neongreen);
+          height: 1.8rem;
+          width: 1.8rem;
+
           border: 2px solid var(--neongreen);
           border-radius:50%;
           cursor: pointer;

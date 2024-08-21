@@ -13,12 +13,15 @@ socket.on('message', (data) => {
 socket.on('roomUsers', ({ room, users }) => {
   // Update the users list when someone joins or leaves the room
   const userList = document.getElementById('userList');
+  const htmlString = `<ul>`;
 
-  userList.innerHTML = `
-      <ul>
-          ${users.map(user => `<p>${user.username}_<i>online</i>commands:${user.data?.orderamount}</p>`).join('')} 
-      </ul>
-  `;
+  users.forEach(user => {
+    htmlString += `<p>${user.username}_<i>online</i>_commands:${user.data?.orderamount}</p><div class="pie"></div>`;
+  });
+
+  htmlString += `<ul>`;
+
+  userList.innerHTML = htmlString;
 });
 
 

@@ -159,8 +159,6 @@ io.on('connection', (socket) => {
               users[roomName][index].data = result.rows[0];
 
 
-              console.log("updated user", result.rows[0], index, users[roomName], socket.username, users[roomName][index].data.param1);
-
               io.to(roomName).emit('roomUsers', {
                 room: roomName,
                 users: users[roomName]

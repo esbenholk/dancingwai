@@ -108,20 +108,20 @@
 
 		});
 
-		const mat = new THREE.MeshPhongMaterial({
-			color: 'rgb(0, 255, 47)',
+		const mat = new THREE.MeshBasicMaterial({
+			color: '#000',
 			metalness: 0.1
 			});
-		const mat2 = new THREE.MeshPhongMaterial({
-			color: 'rgb(255, 0, 255)',
+		const mat2 = new THREE.MeshBasicMaterial({
+			color: '#00ffe8',
 			metalness: 0.1		
 			});
-		const mat3 = new THREE.MeshPhongMaterial({
-			color: 'rgb(0,0,255)', 
+		const mat3 = new THREE.MeshBasicMaterial({
+			color: '#ff00ec', 
 			metalness: 0.1		
 			});
-		const mat4 = new THREE.MeshPhongMaterial({
-			color: 'rgb(255, 0,0)',
+		const mat4 = new THREE.MeshBasicMaterial({
+			color: '#d21526',
 			metalness: 0.1		
 			});
 		const mats = [mat,mat2,mat3,mat4];
@@ -191,6 +191,7 @@
 			const light = new THREE.DirectionalLight( color, intensity );
 			light.position.set( 1,2, 0  );
 			scene.add( light );
+
 		}
 
 
