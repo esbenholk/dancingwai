@@ -26,6 +26,15 @@ li{
   padding: 0;
   padding-inline-start: 0;
 }
+ul{
+  display: flex;
+  justify-content: space-between;
+}
+.pie {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%
+}
 
 h3{
   color: var(--neongreen);
