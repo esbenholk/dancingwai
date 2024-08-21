@@ -25,7 +25,7 @@ socket.on('roomUsers', ({ room, users }) => {
       let param3perc = user.data.domenergy/ (total/100);
       let param4perc = user.data.directorenergy/ (total/100);
       htmlString += `<p>_commands: ${user.data?.orderamount}</p>
-      <div class="pie" style="background-image: conic-gradient(#d21526 0, #d21526 ${param1perc}%, black 0, black ${param3perc}%, #ff00ec 0, #ff00ec ${param2perc}%, #00ffe8 0, #00ffe8 ${param4perc}%)"></div>`;
+      <div class="pie" style="background-image: conic-gradient(#d21526 0, #d21526 ${param1perc}%, black 0, black ${param3perc + param1perc}%, #ff00ec 0, #ff00ec ${param2perc + param3perc + param1perc}%, #00ffe8 0, #00ffe8 100%)"></div>`;
     }
 
   });
