@@ -34,7 +34,7 @@ module.exports.checkHumanity = function checkHumanity(humanityCheck, id) {
 
 module.exports.updateEverything = function checkHumanity(username, param1, param2, param3,param4) {
   return database.query(
-    `UPDATE userdata SET orderAmount = orderAmount + 1, momEnergy = momEnergy + $5, directorEnergy = directorEnergy + $3, domEnergy = domEnergy + + $4, gayEnergy = gayEnergy + $4 WHERE username=$1 RETURNING *`,
+    `UPDATE userdata SET orderAmount = orderAmount + 1, momEnergy = momEnergy + $5, directorEnergy = directorEnergy + $3, domEnergy = domEnergy + $4, gayEnergy = gayEnergy + $4 WHERE username=$1 RETURNING *`,
     [username, param1, param2,param3,param4]  
   );
 };
