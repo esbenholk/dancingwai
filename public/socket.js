@@ -20,12 +20,12 @@ socket.on('roomUsers', ({ room, users }) => {
     htmlString += `<p>${user.username}</br>_<i>online</i>_</p> `
     if(user.data){
       let total = user.data.momenergy + user.data.gayenergy + user.data.domenergy + user.data.directorenergy;
-      let param1perc = 360/100 * (user.data.momenergy/ (total/100));
-      let param2perc = 360/100 * (user.data.gayenergy/ (total/100));
-      let param3perc = 360/100 * (user.data.domenergy/ (total/100));
-      let param4perc = 360/100 * (user.data.directorenergy/ (total/100));
-      htmlString += `<div><p>${user.data?.orderamount}</p>
-      <div class="pie" style="background-image: conic-gradient(#d21526 ${param1perc}deg, #ff00ec 0 ${param2perc}deg, black 0${param3perc}deg, #00ffe8 0 )"></div></div>`;
+      let param1perc = user.data.momenergy/ (total/100);
+      let param2perc = user.data.gayenergy/ (total/100);
+      let param3perc = user.data.domenergy/ (total/100);
+      let param4perc = user.data.directorenergy/ (total/100);
+      htmlString += `<p>_commands: ${user.data?.orderamount}</p>
+      <div class="pie" style="background-image: conic-gradient(#d21526 0, #d21526 ${param1perc}%, black 0, black ${param3perc}%, #ff00ec 0, #ff00ec ${param2perc}%, #00ffe8 0, #00ffe8 ${param4perc}%)"></div>`;
     }
 
   });
