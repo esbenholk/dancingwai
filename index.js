@@ -159,6 +159,10 @@ io.on('connection', (socket) => {
               users[roomName][index].data = result.rows[0];
               console.log(data.name, "is emitting",  users[roomName][index].data);
 
+              data.dbData = result.rows[0];
+              io.to(GameSocketID).emit('hello', data);
+              socket.emit("hello", data);
+
 
               io.to(roomName).emit('roomUsers', {
                 room: roomName,
@@ -172,8 +176,7 @@ io.on('connection', (socket) => {
 
           });
     
-    io.to(GameSocketID).emit('hello', data);
-    socket.emit("hello", data);
+
 
 	});
 	socket.on('Goodbye', async (data) => {

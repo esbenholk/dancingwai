@@ -49,9 +49,12 @@ button.addEventListener('click', sendMessage);
 function sendMessage() {
   button.removeEventListener('click', sendMessage);
 
+  button.classList.add('btn--clicked');
+  button.innerHTML = "";
+    
 
   var dataObject = {
-    name: document.querySelector("#name").innerHTML,
+    name: document.querySelector("#name")?.innerHTML,
     param1: document.querySelector("#param1").value,
     param2: document.querySelector("#param2").value,
     param3: document.querySelector("#param3").value,
@@ -61,15 +64,12 @@ function sendMessage() {
   socket.emit('message',  dataObject);
   socket.emit("hello", dataObject);
 
-  button.classList.add('btn--clicked');
-  button.innerHTML = "";
-    
   setTimeout(()=>{
       button.classList.remove("btn--clicked");
       button.innerHTML = "FEED";
       button.addEventListener('click', sendMessage);
 
-    }, 3000);
+    }, 3500);
 }
 
 

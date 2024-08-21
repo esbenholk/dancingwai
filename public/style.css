@@ -234,7 +234,10 @@ input[type=range]::-webkit-slider-thumb {
   position: relative;
   font-family: sans-serif;
   text-decoration: none;
+  transform-origin:50% 50%;
+
   /* text-transform: uppercase;
+
   letter-spacing: 2.8px; */
   background-color: var(--neongreen);
   border-color: rgba(0,0,0,0);
@@ -464,7 +467,7 @@ input[type=range]::-webkit-slider-thumb {
           height: 100%;
           scroll-snap-align: center;
           display: flex;
-          align-items: flex-start;
+          align-items: center;
           justify-content: space-between;
           flex-direction: column;
           box-sizing: border-box;
