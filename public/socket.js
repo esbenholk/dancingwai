@@ -17,15 +17,15 @@ socket.on('roomUsers', ({ room, users }) => {
 
   users.forEach(user => {
     console.log(user);
-    htmlString += `<p>${user.username}</p>`
+    htmlString += `<p>${user.username}</br>_<i>online</i>_</p> `
     if(user.data){
       let total = user.data.momenergy + user.data.gayenergy + user.data.domenergy + user.data.directorenergy;
-      let param1perc = user.data.momenergy/ (total/100);
-      let param2perc = user.data.gayenergy/ (total/100);
-      let param3perc = user.data.domenergy/ (total/100);
-      let param4perc = user.data.directorenergy/ (total/100);
-      htmlString += `<p>_<i>online</i><br>_commands:${user.data?.orderamount}</p>
-      <div class="pie" style="background-image: conic-gradient(#d21526 ${param1perc}%, #ff00ec ${param2perc}%, black ${param3perc}%, #00ffe8 ${param4perc}%)"></div>`;
+      let param1perc = 360/100 * (user.data.momenergy/ (total/100));
+      let param2perc = 360/100 * (user.data.gayenergy/ (total/100));
+      let param3perc = 360/100 * (user.data.domenergy/ (total/100));
+      let param4perc = 360/100 * (user.data.directorenergy/ (total/100));
+      htmlString += `<div><p>${user.data?.orderamount}</p>
+      <div class="pie" style="background-image: conic-gradient(#d21526 ${param1perc}deg, #ff00ec 0 ${param2perc}deg, black 0${param3perc}deg, #00ffe8 0 )"></div></div>`;
     }
 
   });
