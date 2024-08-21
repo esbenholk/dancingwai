@@ -16,6 +16,8 @@ socket.on('roomUsers', ({ room, users }) => {
   let htmlString = `<ul>`;
 
   users.forEach(user => {
+    console.log(user);
+    
     if(user.data){
       let total = user.data.momEnergy + user.data.gayEnergy + user.data.domEnergy + user.data.directorEnergy;
       let param1perc = user.data.momEnergy/ (total/100);

@@ -146,7 +146,7 @@ io.on('connection', (socket) => {
 	});
 
   socket.on("hello", (data) => {
-		console.log("someone says hi", socket.id, data, data.name);
+		console.log(data.name, "says hi", socket.id, data);
 
     databaseActions
           .updateEverything(data.name, data.param1, data.param2, data.param3, data.param4)
@@ -157,6 +157,7 @@ io.on('connection', (socket) => {
               
            
               users[roomName][index].data = result.rows[0];
+              console.log(data.name, "is emitting",  users[roomName][index].data);
 
 
               io.to(roomName).emit('roomUsers', {
