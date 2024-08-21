@@ -13,7 +13,7 @@ socket.on('message', (data) => {
 socket.on('roomUsers', ({ room, users }) => {
   // Update the users list when someone joins or leaves the room
   const userList = document.getElementById('userList');
-  const htmlString = `<ul>`;
+  let htmlString = `<ul>`;
 
   users.forEach(user => {
     htmlString += `<p>${user.username}_<i>online</i>_commands:${user.data?.orderamount}</p><div class="pie"></div>`;
