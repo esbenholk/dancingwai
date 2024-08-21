@@ -26,7 +26,7 @@ li{
   padding: 0;
   padding-inline-start: 0;
 }
-ul{
+li{
   display: flex;
   justify-content: space-between;
 }
