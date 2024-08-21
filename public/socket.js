@@ -19,11 +19,11 @@ socket.on('roomUsers', ({ room, users }) => {
     console.log(user);
     
     if(user.data){
-      let total = user.data.momEnergy + user.data.gayEnergy + user.data.domEnergy + user.data.directorEnergy;
-      let param1perc = user.data.momEnergy/ (total/100);
-      let param2perc = user.data.gayEnergy/ (total/100);
-      let param3perc = user.data.domEnergy/ (total/100);
-      let param4perc = user.data.directorEnergy/ (total/100);
+      let total = user.data.momenergy + user.data.gayenergy + user.data.domenergy + user.data.directorenergy;
+      let param1perc = user.data.momenergy/ (total/100);
+      let param2perc = user.data.gayenergy/ (total/100);
+      let param3perc = user.data.domenergy/ (total/100);
+      let param4perc = user.data.directorenergy/ (total/100);
       htmlString += `<p>${user.username}_<i>online</i><br>_commands:${user.data?.orderamount}</p>
       <div class="pie" style="background-image: conic-gradient(#d21526 ${param1perc}%, #ff00ec ${param2perc}%, black ${param3perc}%, #00ffe8 ${param4perc}%)"></div>`;
     }
