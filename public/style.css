@@ -77,7 +77,6 @@ video{
         right: 0;
         border-radius: 40px;
 
-        height: calc(100vh - 4rem);
         
 
         border: 2px var(--neongreen) solid;
