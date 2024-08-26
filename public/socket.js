@@ -77,7 +77,7 @@ function sendMessage() {
       button.innerHTML = "FEED";
       button.addEventListener('click', sendMessage);
 
-    }, 3500);
+    }, 7000);
 }
 
 
