@@ -123,8 +123,9 @@ io.on('connection', (socket) => {
     users[roomName].push(user);
 
     console.log("adds user in room", socket.username);
+    io.to(GameSocketID).emit('newUser', users[roomName]);
+    socket.emit("newUser", users[roomName]);
 
-    
     // Notify all users in the room about the new user
     io.to(roomName).emit('roomUsers', {
         room: roomName,
