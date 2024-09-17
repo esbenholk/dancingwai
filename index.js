@@ -195,9 +195,6 @@ io.on('connection', (socket) => {
 
     for (let roomName in users) {
       const index = users[roomName].map((o) => o.username).indexOf(socket.username);
-
-
-      console.log("removes user in room", index, socket.username);
       
       if (index !== -1) {
           users[roomName].splice(index, 1);
@@ -208,6 +205,8 @@ io.on('connection', (socket) => {
               room: roomName,
               users: users[roomName]
           });
+          io.to(GameSocketID).emit('removeUser', users[roomName]);
+          socket.emit("removeUser", users[roomName]);
 
           break;
       }
