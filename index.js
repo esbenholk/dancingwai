@@ -195,6 +195,9 @@ io.on('connection', (socket) => {
     console.log("got emmision from game", data);
     io.to(GameSocketID).emit('gameSaysConsent', true);
     socket.emit('gameSaysConsent', true);
+
+
+    io.to(roomName).emit('gameSaysConsent', true);
 	});
 
 	socket.on('disconnect', (data) => {
