@@ -10,6 +10,11 @@ socket.on('message', (data) => {
     document.getElementById('messages').appendChild(li);
 });
 
+
+socket.on('gameSaysConsent', (data) => {
+ console.log("game says consent", data);
+});
+
 socket.on('roomUsers', ({ room, users }) => {
   // Update the users list when someone joins or leaves the room
   const userList = document.getElementById('userList');

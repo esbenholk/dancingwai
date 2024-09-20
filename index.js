@@ -187,7 +187,11 @@ io.on('connection', (socket) => {
 	});
 
 
-
+	socket.on('consent', async (data) => {
+    console.log("got emmision from game", data);
+    io.to(GameSocketID).emit('gameSaysConsent', true);
+    socket.emit('gameSaysConsent', true);
+	});
 
 	socket.on('disconnect', (data) => {
 		console.log('[' + (new Date()).toUTCString() + '] Bye, client ' + socket.id);
@@ -205,6 +209,7 @@ io.on('connection', (socket) => {
               room: roomName,
               users: users[roomName]
           });
+          
           io.to(GameSocketID).emit('removeUser', users[roomName]);
           socket.emit("removeUser", users[roomName]);
 
