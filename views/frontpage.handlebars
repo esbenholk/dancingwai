@@ -1,6 +1,6 @@
-    {{#if shouldLogIn}}
+    {{!-- {{#if shouldLogIn}}
         {{>cookies}}
-    {{/if}}
+    {{/if}} --}}
 
     {{>pill}}
 
@@ -14,9 +14,9 @@
     <div class="carousel-container" id="carousel">
      
             <div class="carousel-item">
+                  <h1 id="errorMsg" >OBEY THE ALGORITHM BEGINS SHORTLY</h1>
                  <a  class="btn" id="submit" href="" title="">PLAY</a><span class="color color--blue" data-value="1"></span><span class="color color--orange" data-value="1"></span><span class="color color--green" data-value="1"></span><span class="color color--white" data-value="1"></span>
-
-                <div class="sliders">
+                <div id="sliders">
                     <div class="sliderContainer">
                         <p>the influencer</p>
                         <input type="range" min="0" max="100" value="25" class="slider" id="param4" oninput='updateTextInput(this.value, "param4value", "param4", "#d21526");'>
