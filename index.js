@@ -108,6 +108,8 @@ io.on('connection', (socket) => {
 
 
   socket.on('joinRoom', ({ username }) => {
+
+
     socket.join(roomName);
     socket.username = username;
 
@@ -121,6 +123,8 @@ io.on('connection', (socket) => {
    
     }
     users[roomName].push(user);
+
+
 
     console.log("adds user in room", socket.username);
     io.to(GameSocketID).emit('newUser', users[roomName]);
