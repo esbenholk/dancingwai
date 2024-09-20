@@ -11,11 +11,20 @@ socket.on('message', (data) => {
 });
 
 
-
+const button = document.querySelector('#submit');
+button.addEventListener('click',(e)=>{
+    e.preventDefault();
+  })
+button.addEventListener('click', sendMessage);
 
 
 socket.on('gameSaysConsent', (data) => {
  console.log("game says consent", data);
+ button.style.display = "block";
+});
+
+socket.on('block', (data) => {
+  tempDismantleButton();
 });
 
 socket.on('roomUsers', ({ room, users }) => {
@@ -54,20 +63,27 @@ socket.on('roomUsers', ({ room, users }) => {
 });
 
 
-const button = document.querySelector('#submit');
-button.addEventListener('click',(e)=>{
-    e.preventDefault();
-  })
-button.addEventListener('click', sendMessage);
 
 
-    
-function sendMessage() {
+function tempDismantleButton(){
   button.removeEventListener('click', sendMessage);
 
   button.classList.add('btn--clicked');
   button.innerHTML = "";
+  setTimeout(()=>{
+    button.classList.remove("btn--clicked");
+    button.innerHTML = "FEED";
+    button.addEventListener('click', sendMessage);
+
+  }, 7000);
     
+}
+
+    
+function sendMessage() {
+
+
+  tempDismantleButton();
 
   var dataObject = {
     name: document.querySelector("#name")?.innerHTML,
@@ -80,12 +96,7 @@ function sendMessage() {
   socket.emit('message',  dataObject);
   socket.emit("hello", dataObject);
 
-  setTimeout(()=>{
-      button.classList.remove("btn--clicked");
-      button.innerHTML = "FEED";
-      button.addEventListener('click', sendMessage);
 
-    }, 7000);
 }
 
 

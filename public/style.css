@@ -394,6 +394,9 @@ input[type=range]::-webkit-slider-thumb {
   -webkit-box-shadow: -1px 0px 86px 17px rgba(0,255,25,1);
   -moz-box-shadow: -1px 0px 86px 17px rgba(0,255,25,1);
 }
+#submit{
+  display: none;
+}
 
     #submit_container{
         position: fixed;
