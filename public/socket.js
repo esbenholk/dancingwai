@@ -29,15 +29,15 @@ socket.on('gameSaysConsent', (data) => {
 
 
 });
-socket.on('gameSaysDisConsent', (data) => {
+// socket.on('gameSaysDisConsent', (data) => {
 
-  console.log("game says disconsent");
+//   console.log("game says disconsent");
 
-  button.style.display = "none";
-  document.getElementById('sliders').style.display = "none";
-  document.getElementById('errorMsg').style.display = "block";
+//   button.style.display = "none";
+//   document.getElementById('sliders').style.display = "none";
+//   document.getElementById('errorMsg').style.display = "block";
  
- });
+//  });
 
 socket.on('block', (data) => {
   console.log("running an emperativ", data);

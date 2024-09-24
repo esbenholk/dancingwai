@@ -306,121 +306,88 @@ app.post("/secret",  (req, res) => {
 app.get("/", (req, res) => {
 
   let gameRunning = false;
-  // databaseActions
-  // .getAdmin("admin")
-  // .then(result => {
-
-  //   if(result.rows[0].adminconsent == 1){
-  //     gameRunning = true;
-  //   }
-  //   if (req.session.isNew) {
-  //     // If no session exists, set a session ID and send a welcome message
-  //     res.render("frontpage", {
-  //       layout: "main", 
-  //       shouldLogIn: true
-  //     });
-  //     // req.session.id = 'user123'; // This can be any unique identifier
-  //   } else {
-  //     databaseActions
-  //       .getUser(req.cookies.id)
-  //       .then(result => {
-  //         console.log("has user", result.rows[0].username, gameRunning);
+  databaseActions
+  .getAdmin("admin")
+  .then(result => {
+    if(result.rows[0].adminconsent == 1){
+      gameRunning = true;
+    }
+    if (req.session.isNew) {
+      // If no session exists, set a session ID and send a welcome message
+      res.render("frontpage", {
+        layout: "main", 
+        shouldLogIn: true
+      });
+      // req.session.id = 'user123'; // This can be any unique identifier
+    } else {
+      databaseActions
+        .getUser(req.cookies.id)
+        .then(result => {
+          console.log("has user", result.rows[0].username, gameRunning);
   
-  //         res.render("frontpage", {
-  //           layout: "main", 
-  //           shouldLogIn: false,
-  //           name:  result.rows[0].username,
-  //           isOpen: gameRunning
+          res.render("frontpage", {
+            layout: "main", 
+            shouldLogIn: false,
+            name:  result.rows[0].username,
+            isOpen: gameRunning
   
-  //         });
+          });
         
-  //       })
-  //       .catch(err => {
-  //         console.log("doesnt know user");
+        })
+        .catch(err => {
+          console.log("doesnt know user");
   
-  //         res.render("frontpage", {
-  //           layout: "main", 
-  //           shouldLogIn: true,
-  //           isOpen: gameRunning
-  //         });
-  //     });
+          res.render("frontpage", {
+            layout: "main", 
+            shouldLogIn: true,
+            isOpen: gameRunning
+          });
+      });
      
-  //   }
+    }
     
-  // })
-  // .catch(err => {
-  //   databaseActions.createUser("admin").then(result=>{
-  //     if (req.session.isNew) {
-  //       // If no session exists, set a session ID and send a welcome message
-  //       res.render("frontpage", {
-  //         layout: "main", 
-  //         shouldLogIn: true
-  //       });
-  //       // req.session.id = 'user123'; // This can be any unique identifier
-  //     } else {
-  //       databaseActions
-  //         .getUser(req.cookies.id)
-  //         .then(result => {
-  //           console.log("has user", result.rows[0].username, gameRunning);
+  })
+  .catch(err => {
+    databaseActions.createUser("admin").then(result=>{
+      if (req.session.isNew) {
+        // If no session exists, set a session ID and send a welcome message
+        res.render("frontpage", {
+          layout: "main", 
+          shouldLogIn: true
+        });
+        // req.session.id = 'user123'; // This can be any unique identifier
+      } else {
+        databaseActions
+          .getUser(req.cookies.id)
+          .then(result => {
+            console.log("has user", result.rows[0].username, gameRunning);
     
-  //           res.render("frontpage", {
-  //             layout: "main", 
-  //             shouldLogIn: false,
-  //             name:  result.rows[0].username,
-  //             isOpen: gameRunning
+            res.render("frontpage", {
+              layout: "main", 
+              shouldLogIn: false,
+              name:  result.rows[0].username,
+              isOpen: gameRunning
     
-  //           });
+            });
           
-  //         })
-  //         .catch(err => {
-  //           console.log("doesnt know user");
+          })
+          .catch(err => {
+            console.log("doesnt know user");
     
-  //           res.render("frontpage", {
-  //             layout: "main", 
-  //             shouldLogIn: true,
-  //             isOpen: gameRunning
-  //           });
-  //       });
+            res.render("frontpage", {
+              layout: "main", 
+              shouldLogIn: true,
+              isOpen: gameRunning
+            });
+        });
        
-  //     }
-  //   }).catch(_err=>{
-  //     console.log("couldt create admin", _err)
+      }
+    }).catch(_err=>{
+      console.log("couldt create admin", _err)
 
-  //   });
-  // });
-  if (req.session.isNew) {
-    // If no session exists, set a session ID and send a welcome message
-    res.render("frontpage", {
-      layout: "main", 
-      shouldLogIn: true
     });
-    // req.session.id = 'user123'; // This can be any unique identifier
-  } else {
-    databaseActions
-      .getUser(req.cookies.id)
-      .then(result => {
-        console.log("has user", result.rows[0].username, gameRunning);
-
-        res.render("frontpage", {
-          layout: "main", 
-          shouldLogIn: false,
-          name:  result.rows[0].username,
-          isOpen: gameRunning
-
-        });
-      
-      })
-      .catch(err => {
-        console.log("doesnt know user");
-
-        res.render("frontpage", {
-          layout: "main", 
-          shouldLogIn: true,
-          isOpen: gameRunning
-        });
-    });
-   
-  }
+  });
+  
 
   
  
