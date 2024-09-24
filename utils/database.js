@@ -24,6 +24,10 @@ module.exports.createUser = function createUser(username) {
   );
 };
 
+module.exports.getAdmin= function getAdmin(name) {
+  return database.query(`SELECT * FROM userdata WHERE username=$1`, [admin]);
+};
+
 module.exports.updateAdmin = function updateAdmin(binaryBool, username) {
   return database.query(
     `UPDATE userdata SET adminConsent = $1 WHERE username=$2 RETURNING *`,

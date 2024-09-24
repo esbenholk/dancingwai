@@ -242,7 +242,7 @@ io.on('connection', (socket) => {
 function isTheAdminConsented(){
   let consent = false;
   databaseActions
-  .getUser("admin")
+  .getAdmin("admin")
   .then(result => {
 
     console.log("has admin", result)
