@@ -84,7 +84,7 @@ function tempDismantleButton(){
     button.innerHTML = "FEED";
     button.addEventListener('click', sendMessage);
 
-  }, 7000);
+  }, 13000);
     
 }
 

@@ -35,6 +35,14 @@ module.exports.updateAdmin = function updateAdmin(binaryBool, username) {
   );
 };
 
+module.exports.updateUserSecret = function updateUserSecret(secret, username) {
+  return database.query(
+    `UPDATE userdata SET secret = $1 WHERE username=$2 RETURNING *`,
+    [secret, username]
+  );
+};
+
+
 module.exports.updateEverything = function checkHumanity(username, param1, param2, param3,param4) {
   return database.query(
     `UPDATE userdata SET orderAmount = orderAmount + 1, momEnergy = momEnergy + $5, directorEnergy = directorEnergy + $3, domEnergy = domEnergy + $2, gayEnergy = gayEnergy + $4 WHERE username=$1 RETURNING *`,

@@ -255,10 +255,6 @@ app.post("/cookies",  (req, res) => {
   if (req.body.yes == "") {
     let username = req.body.username;
     console.log("sending to database", req.session.isNew, username);
-
-
-
-
     databaseActions
           .createUser(username)
           .then(result => {
@@ -279,7 +275,20 @@ app.post("/cookies",  (req, res) => {
             });
           });
     
-    
+  }
+});
+
+app.post("/secret",  (req, res) => {
+  if (req.body.yes == "") {
+    let username = req.body.username;
+    console.log("sending to database", req.session.isNew, username);
+    databaseActions
+          .updateUserSecret(username)
+          .then(result => {
+
+          })
+          .catch(err => {
+          });
     
   }
 });

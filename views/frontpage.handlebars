@@ -13,10 +13,10 @@
 
     <div class="carousel-container" id="carousel">
             <div class="carousel-item">
-                            <h1 id="errorMsg" {{#if isClosed}} class="visible" {{/if}} >OBEY THE ALGORITHM</h1>
+                <h1 id="errorMsg" {{#if isClosed}} class="visible" {{/if}} >OBEY THE ALGORITHM</h1>
 
               
-                            <a  class="btn" id="submit" {{#if isClosed}} class="invisible" {{/if}} href="" title="">PLAY</a>
+                <a  class="btn" id="submit" {{#if isClosed}} class="invisible" {{/if}} href="" title="">PLAY</a>
                                 <div id="sliders" {{#if isClosed}} class="invisible" {{/if}}>
                                     <div class="sliderContainer">
                                         <p>the influencer</p>
@@ -53,6 +53,9 @@
                     </div>
                    
                 </div>
+            </div>
+            <div class="carousel-item"></div>
+                {{>secret}}
             </div>
     
     </div>
