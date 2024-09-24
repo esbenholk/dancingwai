@@ -248,11 +248,12 @@ function isTheAdminConsented(){
     console.log("has admin", result)
     if(result.rows[0].adminconsent == 1){
       io.to(GameSocketID).emit('gameSaysConsent', true);
-      // socket.emit('gameSaysConsent', true);
+      //socket.emit('gameSaysConsent', true);
       io.to(roomName).emit('gameSaysConsent', true);
       consent = true;
 
       console.log("should be open")
+      return consent;
     }
     
   })
@@ -268,9 +269,9 @@ function isTheAdminConsented(){
  
 
     consent = false;
-    
+    return consent;
   });
-  return consent;
+
 }
 
 
