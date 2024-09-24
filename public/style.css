@@ -268,12 +268,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 
-.invisible{
-  display: none;
-}
-.visible{
-  display: flex;
-}
+
 #submit{
   display: none;
 }
@@ -519,4 +514,11 @@ input[type=range]::-webkit-slider-thumb {
 
       .footer button:disabled {
           visibility: hidden;
+      }
+
+      .invisible{
+        display: none;
+      }
+      .visible{
+        display: flex;
       }
