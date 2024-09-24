@@ -239,40 +239,6 @@ io.on('connection', (socket) => {
 	});
 
 
-function isTheAdminConsented(){
-  let consent = false;
-  databaseActions
-  .getAdmin("admin")
-  .then(result => {
-
-     if(result.rows[0].adminconsent == 1){
-      io.to(GameSocketID).emit('gameSaysConsent', true);
-      //socket.emit('gameSaysConsent', true);
-      io.to(roomName).emit('gameSaysConsent', true);
-      consent = true;
-
-      console.log("should be open")
-      return consent;
-    }
-    
-  })
-  .catch(err => {
-    console.log("should create admin", err)
-
-    databaseActions.createUser("admin").then(result=>{
-      console.log("creates admin", result)
-    }).catch(_err=>{
-      console.log("couldt create admin", _err)
-
-    });
- 
-
-    consent = false;
-    return consent;
-  });
-
-}
-
 
 
 
@@ -314,42 +280,91 @@ app.post("/cookies",  (req, res) => {
 
 app.get("/", (req, res) => {
 
-  let isOpen = isTheAdminConsented();
-  console.log("admin is consented", isOpen);
+  let gameRunning = false;
+  databaseActions
+  .getAdmin("admin")
+  .then(result => {
+
+    if(result.rows[0].adminconsent == 1){
+      gameRunning = true;
+    }
+    if (req.session.isNew) {
+      // If no session exists, set a session ID and send a welcome message
+      res.render("frontpage", {
+        layout: "main", 
+        shouldLogIn: true
+      });
+      // req.session.id = 'user123'; // This can be any unique identifier
+    } else {
+      databaseActions
+        .getUser(req.cookies.id)
+        .then(result => {
+          console.log("has user", result.rows[0].username, gameRunning);
   
-  if (req.session.isNew) {
-    // If no session exists, set a session ID and send a welcome message
-    res.render("frontpage", {
-      layout: "main", 
-      shouldLogIn: true
-    });
-    // req.session.id = 'user123'; // This can be any unique identifier
-  } else {
-    databaseActions
-      .getUser(req.cookies.id)
-      .then(result => {
-        console.log("has user", result.rows[0].username, isOpen);
-
-        res.render("frontpage", {
-          layout: "main", 
-          shouldLogIn: false,
-          name:  result.rows[0].username,
-          isClosed : !isOpen,
-          isOpen: isOpen
-
-        });
-      
-      })
-      .catch(err => {
-        console.log("doesnt know user");
-
+          res.render("frontpage", {
+            layout: "main", 
+            shouldLogIn: false,
+            name:  result.rows[0].username,
+            isClosed: !gameRunning
+  
+          });
+        
+        })
+        .catch(err => {
+          console.log("doesnt know user");
+  
+          res.render("frontpage", {
+            layout: "main", 
+            shouldLogIn: true,
+            isClosed: !gameRunning
+          });
+      });
+     
+    }
+    
+  })
+  .catch(err => {
+    databaseActions.createUser("admin").then(result=>{
+      if (req.session.isNew) {
+        // If no session exists, set a session ID and send a welcome message
         res.render("frontpage", {
           layout: "main", 
           shouldLogIn: true
         });
+        // req.session.id = 'user123'; // This can be any unique identifier
+      } else {
+        databaseActions
+          .getUser(req.cookies.id)
+          .then(result => {
+            console.log("has user", result.rows[0].username, gameRunning);
+    
+            res.render("frontpage", {
+              layout: "main", 
+              shouldLogIn: false,
+              name:  result.rows[0].username,
+              isClosed: !gameRunning
+    
+            });
+          
+          })
+          .catch(err => {
+            console.log("doesnt know user");
+    
+            res.render("frontpage", {
+              layout: "main", 
+              shouldLogIn: true,
+              isClosed: !gameRunning
+            });
+        });
+       
+      }
+    }).catch(_err=>{
+      console.log("couldt create admin", _err)
+
     });
-   
-  }
+  });
+  
+
   
  
  
