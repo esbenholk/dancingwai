@@ -24,7 +24,7 @@ module.exports.createUser = function createUser(username) {
   );
 };
 
-module.exports.getAdmin= function getAdmin(name) {
+module.exports.getAdmin= function getAdmin(admin) {
   return database.query(`SELECT * FROM userdata WHERE username=$1`, [admin]);
 };
 
