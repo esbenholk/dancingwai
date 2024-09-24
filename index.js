@@ -196,7 +196,7 @@ io.on('connection', (socket) => {
     socket.emit('gameSaysConsent', true);
     io.to(roomName).emit('gameSaysConsent', true);
 
-    databaseActions.updateAdmin(1);
+    databaseActions.updateAdmin(1,"admin");
 	});
 
   socket.on('block', async (data) => {

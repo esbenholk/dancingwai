@@ -24,10 +24,10 @@ module.exports.createUser = function createUser(username) {
   );
 };
 
-module.exports.updateAdmin = function updateAdmin(binaryBool) {
+module.exports.updateAdmin = function updateAdmin(binaryBool, username) {
   return database.query(
-    `UPDATE userdata SET adminConsent = $1 WHERE username=admin RETURNING *`,
-    [binaryBool]
+    `UPDATE userdata SET adminConsent = $1 WHERE username=$2 RETURNING *`,
+    [binaryBool, username]
   );
 };
 
