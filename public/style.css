@@ -242,7 +242,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 
-
+.btn,
 #submit{
   display: none;
   position: relative;
@@ -265,6 +265,9 @@ input[type=range]::-webkit-slider-thumb {
   text-align: center;
   font-size: 2rem;
   transition: 0.6s cubic-bezier(0.01, 1.69, 0.99, 0.94);
+}
+#loginbtn{
+  display: block;
 }
 
 .cookieContainer .btn{
