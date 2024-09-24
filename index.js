@@ -327,13 +327,14 @@ app.get("/", (req, res) => {
     databaseActions
       .getUser(req.cookies.id)
       .then(result => {
-        console.log("has user", result.rows[0].username, req.cookies.id, result.rows[0].id);
+        console.log("has user", result.rows[0].username, isOpen);
 
         res.render("frontpage", {
           layout: "main", 
           shouldLogIn: false,
           name:  result.rows[0].username,
           isClosed : !isOpen,
+          isOpen: isOpen
 
         });
       

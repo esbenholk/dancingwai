@@ -18,8 +18,8 @@
                     {{/if}}
                        
               
-                            <a  class="btn" id="submit {{#if isClosed}} invisible {{/if}}" href="" title="">PLAY</a>
-                                <div id="sliders {{#if isClosed}} invisible {{/if}}">
+                            <a  class="btn" id="submit" class="invisible" {{/if}} href="" title="">PLAY</a>
+                                <div id="sliders" {{#if isClosed}} class="invisible" {{/if}}>
                                     <div class="sliderContainer">
                                         <p>the influencer</p>
                                         <input type="range" min="0" max="100" value="25" class="slider" id="param4" oninput='updateTextInput(this.value, "param4value", "param4", "#d21526");'>
