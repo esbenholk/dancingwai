@@ -280,7 +280,6 @@ app.post("/cookies",  (req, res) => {
             res.cookie("id", result.rows[0].id); 
 
             res.redirect("/");
-            isTheAdminConsented();
           })
           .catch(err => {
   
@@ -301,6 +300,8 @@ app.post("/cookies",  (req, res) => {
 
 
 app.get("/", (req, res) => {
+  isTheAdminConsented();
+
   if (req.session.isNew) {
     // If no session exists, set a session ID and send a welcome message
     res.render("frontpage", {
