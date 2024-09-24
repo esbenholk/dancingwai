@@ -19,12 +19,20 @@ button.addEventListener('click', sendMessage);
 
 
 socket.on('gameSaysConsent', (data) => {
+
+console.log("game says consent");
+
  button.style.display = "block";
  document.getElementById('sliders').style.display = "flex";
  document.getElementById('errorMsg').style.display = "none";
 
+
+
 });
 socket.on('gameSaysDisConsent', (data) => {
+
+  console.log("game says disconsent");
+
   button.style.display = "none";
   document.getElementById('sliders').style.display = "none";
   document.getElementById('errorMsg').style.display = "flex";
