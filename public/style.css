@@ -174,7 +174,7 @@ margin: 0;
   width: calc(100% - 0rem);
   min-height: 60vh;
   align-items: flex-end;
-  visibility: hidden;
+  display: none;
 
 
 }
