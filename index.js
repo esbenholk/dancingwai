@@ -199,6 +199,15 @@ io.on('connection', (socket) => {
     databaseActions.updateAdmin(1,"admin");
 	});
 
+  socket.on('disconsent', async (data) => {
+    io.to(GameSocketID).emit('gameSaysDisConsent', true);
+    socket.emit('gameSaysDisConsent', true);
+    io.to(roomName).emit('gameSaysDisConsent', true);
+
+    databaseActions.updateAdmin(0,"admin");
+	});
+
+
   socket.on('block', async (data) => {
     io.to(GameSocketID).emit('block', true);
     socket.emit('block', true);

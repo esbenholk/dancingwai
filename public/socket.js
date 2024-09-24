@@ -19,13 +19,17 @@ button.addEventListener('click', sendMessage);
 
 
 socket.on('gameSaysConsent', (data) => {
- console.log("game says consent", data);
  button.style.display = "block";
-
  document.getElementById('sliders').style.display = "flex";
  document.getElementById('errorMsg').style.display = "none";
 
 });
+socket.on('gameSaysDisConsent', (data) => {
+  button.style.display = "none";
+  document.getElementById('sliders').style.display = "none";
+  document.getElementById('errorMsg').style.display = "flex";
+ 
+ });
 
 socket.on('block', (data) => {
   console.log("running an emperativ", data);
