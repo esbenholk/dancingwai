@@ -270,14 +270,15 @@ input[type=range]::-webkit-slider-thumb {
 #loginbtn{
   display: block;
 }
-
+.secretContainer .btn,
 .cookieContainer .btn{
   width: 100%;
 }
+.secretContainer form,
 .cookieContainer form{
   width: 100%;
 }
-.userDetails input,
+.secretContainer input,
 .cookieContainer input{
   font-size: 2rem;
   height: 73px;
@@ -292,6 +293,9 @@ input[type=range]::-webkit-slider-thumb {
   text-align: center;
   color:var(--neongreen);
 }
+.secretContainer input{
+  height: 50%;
+}
 :focus{
   outline: none;
 }
@@ -304,7 +308,9 @@ input[type=range]::-webkit-slider-thumb {
   color: white;
 }
 
-
+#secretthanku{
+  display: none;
+}
 .btn--clicked {
   transition: 1.2s cubic-bezier(0.01, 1.69, 0.99, 0.94);
   padding: 0;

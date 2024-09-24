@@ -37,7 +37,7 @@ module.exports.updateAdmin = function updateAdmin(binaryBool, username) {
 
 module.exports.updateUserSecret = function updateUserSecret(secret, username) {
   return database.query(
-    `UPDATE userdata SET secret = $1 WHERE username=$2 RETURNING *`,
+    `UPDATE userdata SET secrets = $1 WHERE username=$2 RETURNING *`,
     [secret, username]
   );
 };

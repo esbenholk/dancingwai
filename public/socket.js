@@ -140,4 +140,13 @@ window.onload = (event) => {
   }
 };
 
+
+const secretbutton = document.querySelector("#sharebtn");
+if(secretbutton){
+  secretbutton.addEventListener('click',(e)=>{
+    document.querySelector('#secretform').style.display = "none";
+    document.querySelector('#secretthanku').style.display = "block";
+  })
+}
+
 window.sendMessage = sendMessage;
