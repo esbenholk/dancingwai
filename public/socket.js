@@ -26,6 +26,7 @@ socket.on('gameSaysConsent', (data) => {
 });
 
 socket.on('block', (data) => {
+  console.log("running an emperativ", data);
   tempDismantleButton();
 });
 

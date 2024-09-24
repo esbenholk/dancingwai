@@ -192,9 +192,14 @@ io.on('connection', (socket) => {
 
 
 	socket.on('consent', async (data) => {
+    io.to(GameSocketID).emit('gameSaysConsent', true);
+    socket.emit('gameSaysConsent', true);
     io.to(roomName).emit('gameSaysConsent', true);
 	});
+
   socket.on('block', async (data) => {
+    io.to(GameSocketID).emit('block', true);
+    socket.emit('block', true);
     io.to(roomName).emit('block', true);
 	});
 
