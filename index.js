@@ -44,6 +44,7 @@ stun.request("stun.l.google.com:19302", (err, res) => {
 const cookieSession = require('cookie-session');
 const csurf = require('csurf');
 const cookieParser = require("cookie-parser");
+const { log } = require('console');
 
 app.use(cors());
 // app.use(router);
@@ -197,6 +198,9 @@ io.on('connection', (socket) => {
     io.to(roomName).emit('gameSaysConsent', true);
 
     databaseActions.updateAdmin(1,"admin");
+
+    console.log("game has emitted content");
+    
 	});
 
   socket.on('disconsent', async (data) => {
@@ -323,7 +327,7 @@ app.get("/", (req, res) => {
             layout: "main", 
             shouldLogIn: false,
             name:  result.rows[0].username,
-            isClosed: !gameRunning
+            isOpen: gameRunning
   
           });
         
@@ -334,7 +338,7 @@ app.get("/", (req, res) => {
           res.render("frontpage", {
             layout: "main", 
             shouldLogIn: true,
-            isClosed: !gameRunning
+            isOpen: gameRunning
           });
       });
      
@@ -360,7 +364,7 @@ app.get("/", (req, res) => {
               layout: "main", 
               shouldLogIn: false,
               name:  result.rows[0].username,
-              isClosed: !gameRunning
+              isOpen: gameRunning
     
             });
           
@@ -371,7 +375,7 @@ app.get("/", (req, res) => {
             res.render("frontpage", {
               layout: "main", 
               shouldLogIn: true,
-              isClosed: !gameRunning
+              isOpen: gameRunning
             });
         });
        
