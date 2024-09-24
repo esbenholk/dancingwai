@@ -244,6 +244,8 @@ function isTheAdminConsented(){
   databaseActions
   .getUser("admin")
   .then(result => {
+
+    console.log("has admin", result)
     if(result.adminConsent == 1){
       io.to(GameSocketID).emit('gameSaysConsent', true);
       // socket.emit('gameSaysConsent', true);
@@ -253,7 +255,16 @@ function isTheAdminConsented(){
     
   })
   .catch(err => {
-    databaseActions.createUser("admin");
+    console.log("should create admin", err)
+
+    databaseActions.createUser("admin").then(result=>{
+      console.log("creates admin", result)
+    }).catch(_err=>{
+      console.log("couldt create admin", _err)
+
+    });
+ 
+
     consent = false;
     
   });
@@ -300,6 +311,7 @@ app.post("/cookies",  (req, res) => {
 
 
 app.get("/", (req, res) => {
+
   isTheAdminConsented();
 
   if (req.session.isNew) {
