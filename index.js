@@ -245,8 +245,7 @@ function isTheAdminConsented(){
   .getAdmin("admin")
   .then(result => {
 
-    console.log("has admin", result)
-    if(result.rows[0].adminconsent == 1){
+     if(result.rows[0].adminconsent == 1){
       io.to(GameSocketID).emit('gameSaysConsent', true);
       //socket.emit('gameSaysConsent', true);
       io.to(roomName).emit('gameSaysConsent', true);
