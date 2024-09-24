@@ -251,6 +251,8 @@ function isTheAdminConsented(){
       // socket.emit('gameSaysConsent', true);
       io.to(roomName).emit('gameSaysConsent', true);
       consent = true;
+
+      console.log("should be open")
     }
     
   })
