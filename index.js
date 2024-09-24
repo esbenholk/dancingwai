@@ -315,7 +315,8 @@ app.post("/cookies",  (req, res) => {
 app.get("/", (req, res) => {
 
   let isOpen = isTheAdminConsented();
-
+  console.log("admin is consented", isOpen);
+  
   if (req.session.isNew) {
     // If no session exists, set a session ID and send a welcome message
     res.render("frontpage", {
