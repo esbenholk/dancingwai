@@ -269,7 +269,7 @@ app.post("/cookies",  (req, res) => {
     console.log("sending to database", req.session.isNew, username);
 
 
-    isTheAdminConsented();
+
 
     databaseActions
           .createUser(username)
@@ -280,6 +280,7 @@ app.post("/cookies",  (req, res) => {
             res.cookie("id", result.rows[0].id); 
 
             res.redirect("/");
+            isTheAdminConsented();
           })
           .catch(err => {
   
