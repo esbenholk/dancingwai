@@ -24,11 +24,10 @@ module.exports.createUser = function createUser(username) {
   );
 };
 
-////recaptcha query 
-module.exports.checkHumanity = function checkHumanity(humanityCheck, id) {
+module.exports.updateAdmin = function updateAdmin(binaryBool) {
   return database.query(
-    `UPDATE userdata SET humanity_check = $1 WHERE id =$2 RETURNING *`,
-    [humanityCheck, id]  
+    `UPDATE userdata SET adminConsent = $1 WHERE username=admin RETURNING *`,
+    [binaryBool]
   );
 };
 
@@ -38,32 +37,6 @@ module.exports.updateEverything = function checkHumanity(username, param1, param
     [username, param1, param2,param3,param4]  
   );
 };
-module.exports.updateEmail = function updateEmail(email, id) {
-  return database.query(
-    `UPDATE userdata SET email = $1 WHERE id =$2 RETURNING *`,
-    [email, id]  
-  );
-};
-
-
-module.exports.dynamicUpdate = function dynamicUpdate(column, value, id) {
-  return database.query(
-    `UPDATE userdata SET `+  column + ` =  ` + value + ` WHERE id =$1 RETURNING *`,
-    [id]  
-  );
-};
-module.exports.dynamicTip = function dynamicTip(performer, tip, id) {
-  return database.query(
-    `UPDATE userdata SET `+  performer + ` = $1 WHERE id =$2 RETURNING *`,
-    [tip,id]  
-  );
-};
-module.exports.getTip = function getTip(performer, id) {
-  return database.query(
-    `SELECT` + performer + ` FROM userdata WHERE id =$1`,
-    [id]  
-  );
-};
 
 
 
@@ -74,32 +47,6 @@ module.exports.getTip = function getTip(performer, id) {
 
 
 
-
-
-
-module.exports.updatePaymentStatus= function updatePaymentStatus(has_tipped, real_name, performer, tip, id) {
-  return database.query(
-    `UPDATE userdata SET has_tipped_performer = $1, name=$2, `+  performer + ` =  ` + tip + ` WHERE id =$3 RETURNING *`,
-    [has_tipped, real_name, id]  
-  );
-};
-
-
-
-
-
-
-
-
-
-
-
-module.exports.registerTurnOn= function registerTurnOn(turnon, id) {
-  return database.query(
-    `UPDATE userdata SET fetish = $1 WHERE id =$2 RETURNING *`,
-    [turnon, id]  
-  );
-};
 
 
 

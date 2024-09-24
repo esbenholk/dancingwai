@@ -195,6 +195,8 @@ io.on('connection', (socket) => {
     io.to(GameSocketID).emit('gameSaysConsent', true);
     socket.emit('gameSaysConsent', true);
     io.to(roomName).emit('gameSaysConsent', true);
+
+    databaseActions.updateAdmin(1);
 	});
 
   socket.on('block', async (data) => {
@@ -237,7 +239,26 @@ io.on('connection', (socket) => {
 	});
 
 
-
+function isTheAdminConsented(){
+  let consent = false;
+  databaseActions
+  .getUser("admin")
+  .then(result => {
+    if(result.adminConsent == 1){
+      io.to(GameSocketID).emit('gameSaysConsent', true);
+      socket.emit('gameSaysConsent', true);
+      io.to(roomName).emit('gameSaysConsent', true);
+      consent = true;
+    }
+    
+  })
+  .catch(err => {
+    databaseActions.createUser("admin");
+    consent = false;
+    
+  });
+  return consent;
+}
 
 
 
@@ -246,6 +267,10 @@ app.post("/cookies",  (req, res) => {
   if (req.body.yes == "") {
     let username = req.body.username;
     console.log("sending to database", req.session.isNew, username);
+
+
+    isTheAdminConsented();
+
     databaseActions
           .createUser(username)
           .then(result => {
