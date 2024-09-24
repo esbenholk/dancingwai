@@ -128,7 +128,7 @@ if(loginbutton){
 
 
 function login(name){
-  console.log("tries to join room", name);
+  console.log("tries to join room", name, socket.name);
   socket.emit('joinRoom', { username : name });
 }
 
