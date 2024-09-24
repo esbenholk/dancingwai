@@ -294,7 +294,9 @@ input[type=range]::-webkit-slider-thumb {
   color:var(--neongreen);
 }
 .secretContainer input{
-  height: 50%;
+  height: 50vh;
+  background-color: aqua;
+  color:rgb(0, 21, 255);
 }
 :focus{
   outline: none;

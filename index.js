@@ -288,10 +288,11 @@ app.post("/cookies",  (req, res) => {
 app.post("/secret",  (req, res) => {
   if (req.body.yes == "") {
     let username = req.body.username;
-    console.log("sending to database", req.session.isNew, username);
+    console.log("sending to database", req.body);
     databaseActions
           .updateUserSecret(username)
           .then(result => {
+            console.log("sent to database", result);
 
           })
           .catch(err => {
