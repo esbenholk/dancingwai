@@ -246,7 +246,7 @@ function isTheAdminConsented(){
   .then(result => {
     if(result.adminConsent == 1){
       io.to(GameSocketID).emit('gameSaysConsent', true);
-      socket.emit('gameSaysConsent', true);
+      // socket.emit('gameSaysConsent', true);
       io.to(roomName).emit('gameSaysConsent', true);
       consent = true;
     }
