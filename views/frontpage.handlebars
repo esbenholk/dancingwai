@@ -13,13 +13,13 @@
 
     <div class="carousel-container" id="carousel">
             <div class="carousel-item">
-                  {{#if !isOpen}}
+                  {{#if isClosed}}
                         <h1 id="errorMsg" >OBEY THE ALGORITHM BEGINS SHORTLY</h1>
                     {{/if}}
                        
               
-                            <a  class="btn" id="submit {{#if isOpen}} visible {{/if}}" href="" title="">PLAY</a>
-                                <div id="sliders {{#if isOpen}} visible {{/if}}">
+                            <a  class="btn" id="submit {{#if isClosed}} invisible {{/if}}" href="" title="">PLAY</a>
+                                <div id="sliders {{#if isClosed}} invisible {{/if}}">
                                     <div class="sliderContainer">
                                         <p>the influencer</p>
                                         <input type="range" min="0" max="100" value="25" class="slider" id="param4" oninput='updateTextInput(this.value, "param4value", "param4", "#d21526");'>

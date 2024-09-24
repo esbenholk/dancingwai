@@ -333,7 +333,7 @@ app.get("/", (req, res) => {
           layout: "main", 
           shouldLogIn: false,
           name:  result.rows[0].username,
-          isOpen : isOpen,
+          isClosed : !isOpen,
 
         });
       
