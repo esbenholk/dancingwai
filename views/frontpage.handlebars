@@ -13,10 +13,8 @@
 
     <div class="carousel-container" id="carousel">
             <div class="carousel-item">
-                  {{#if isClosed}}
-                        <h1 id="errorMsg" >OBEY THE ALGORITHM BEGINS SHORTLY</h1>
-                    {{/if}}
-                       
+                            <h1 id="errorMsg" {{#if isClosed}} class="visible" {{/if}} >OBEY THE ALGORITHM</h1>
+
               
                             <a  class="btn" id="submit" {{#if isClosed}} class="invisible" {{/if}} href="" title="">PLAY</a>
                                 <div id="sliders" {{#if isClosed}} class="invisible" {{/if}}>

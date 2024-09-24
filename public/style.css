@@ -269,6 +269,9 @@ input[type=range]::-webkit-slider-thumb {
 .invisible{
   display: none;
 }
+.visible{
+  display: flex;
+}
 
 .cookieContainer .btn{
   width: 100%;
