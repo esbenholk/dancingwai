@@ -22,7 +22,7 @@ socket.on('gameSaysConsent', (data) => {
  console.log("game says consent", data);
  button.style.visibility = "visible";
  button.addEventListener('click', sendMessage);
- document.getElementById('sliders').style.display = "block";
+ document.getElementById('sliders').style.display = "flex";
  document.getElementById('errorMsg').style.display = "none";
 
 });
