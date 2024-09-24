@@ -133,6 +133,8 @@ function login(name){
 }
 
 window.onload = (event) => {
+  console.log("window on load", document.querySelector("#name"),document.querySelector("#name").innerHTML, loginbutton );
+  
   if(!loginbutton && document.querySelector("#name")){
     login(document.querySelector("#name").innerHTML);
   }
