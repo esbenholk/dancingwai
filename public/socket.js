@@ -15,13 +15,13 @@ const button = document.querySelector('#submit');
 button.addEventListener('click',(e)=>{
     e.preventDefault();
   })
-
+button.addEventListener('click', sendMessage);
 
 
 socket.on('gameSaysConsent', (data) => {
  console.log("game says consent", data);
- button.style.visibility = "visible";
- button.addEventListener('click', sendMessage);
+ button.style.display = "block";
+
  document.getElementById('sliders').style.display = "flex";
  document.getElementById('errorMsg').style.display = "none";
 

@@ -314,7 +314,7 @@ app.post("/cookies",  (req, res) => {
 
 app.get("/", (req, res) => {
 
-  isTheAdminConsented();
+  let isOpen = isTheAdminConsented();
 
   if (req.session.isNew) {
     // If no session exists, set a session ID and send a welcome message
@@ -333,6 +333,7 @@ app.get("/", (req, res) => {
           layout: "main", 
           shouldLogIn: false,
           name:  result.rows[0].username,
+          isOpen : isOpen,
 
         });
       
